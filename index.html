@@ -3,353 +3,326 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WorldFG - Social Platform</title>
+    <title>WorldFG - Connect With The World</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #1877f2;
-            --success: #42b72a;
-            --danger: #e41e3f;
-            --warning: #f7b928;
+            --blue: #1877f2;
+            --green: #42b72a;
+            --red: #e41e3f;
+            --yellow: #f7b928;
             --bg: #f0f2f5;
-            --card: #ffffff;
+            --white: #ffffff;
             --text: #1c1e21;
-            --text2: #65676b;
+            --gray: #65676b;
             --border: #e4e6eb;
-            --hover: #f2f2f2;
             --shadow: 0 1px 2px rgba(0,0,0,0.1);
+            --shadow-lg: 0 4px 12px rgba(0,0,0,0.15);
         }
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            background: var(--bg);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background: var(--bg); 
             color: var(--text);
             min-height: 100vh;
         }
-        /* Navbar */
-        .navbar {
-            background: var(--card);
-            height: 56px;
+
+        /* TOP NAVBAR */
+        .topbar {
+            background: var(--white);
+            padding: 8px 16px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 16px;
             box-shadow: var(--shadow);
             position: sticky;
             top: 0;
             z-index: 1000;
+            gap: 10px;
         }
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--primary);
-            cursor: pointer;
+        .logo-area {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
+            cursor: pointer;
         }
-        .logo span {
-            background: var(--primary);
-            color: white;
-            width: 36px;
-            height: 36px;
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--blue);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
         }
-        .nav-tabs {
-            display: flex;
-            gap: 2px;
+        .logo-text {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--blue);
         }
-        .nav-tab {
-            padding: 8px 14px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 500;
-            font-size: 0.9rem;
-            border: none;
-            background: none;
-            color: var(--text2);
-            transition: 0.2s;
-            border-bottom: 3px solid transparent;
-        }
-        .nav-tab:hover {
-            background: var(--hover);
-            color: var(--text);
-        }
-        .nav-tab.active {
-            color: var(--primary);
-            border-bottom-color: var(--primary);
-            background: transparent;
-        }
-        .nav-actions {
+        .search-box {
             display: flex;
             align-items: center;
-            gap: 10px;
+            background: var(--bg);
+            border-radius: 20px;
+            padding: 8px 16px;
+            gap: 8px;
+            flex: 1;
+            max-width: 400px;
         }
-        .nav-btn {
+        .search-box input {
+            border: none;
+            background: none;
+            outline: none;
+            font-size: 14px;
+            width: 100%;
+        }
+        .topbar-icons {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .icon-btn {
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            border: none;
             background: var(--bg);
+            border: none;
             cursor: pointer;
-            font-size: 1.1rem;
+            font-size: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
-            color: var(--text);
+            transition: 0.2s;
         }
-        .nav-btn:hover {
-            background: #d8dadf;
-        }
-        .badge {
+        .icon-btn:hover { background: #d8dadf; }
+        .badge-dot {
             position: absolute;
-            top: 2px;
-            right: 4px;
-            background: var(--danger);
-            color: white;
-            font-size: 0.6rem;
-            width: 18px;
-            height: 18px;
+            top: 5px;
+            right: 5px;
+            width: 10px;
+            height: 10px;
+            background: var(--red);
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
+            border: 2px solid white;
         }
-        .logout-btn {
-            background: var(--danger);
-            color: white;
-            border: none;
-            padding: 6px 14px;
-            border-radius: 6px;
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
             cursor: pointer;
-            font-weight: 600;
-            font-size: 0.85rem;
+            border: 2px solid transparent;
+            transition: 0.2s;
         }
-        /* Main Layout */
-        .main-container {
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 0 20px;
+        .user-avatar:hover { border-color: var(--blue); }
+
+        /* MAIN LAYOUT */
+        .main-layout {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 16px;
+            gap: 16px;
         }
-        .page {
-            display: none;
-            animation: fadeIn 0.3s;
+        .sidebar-left {
+            width: 280px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 80px;
+            height: fit-content;
         }
-        .page.active {
-            display: block;
+        .main-feed {
+            flex: 1;
+            max-width: 680px;
+            min-width: 0;
         }
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(8px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .sidebar-right {
+            width: 320px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 80px;
+            height: fit-content;
         }
-        /* Cards */
+
+        @media (max-width: 1100px) {
+            .sidebar-left, .sidebar-right { display: none; }
+            .main-feed { max-width: 100%; }
+        }
+        @media (max-width: 768px) {
+            .search-box { display: none; }
+            .logo-text { display: none; }
+        }
+
+        /* CARDS */
         .card {
-            background: var(--card);
+            background: var(--white);
             border-radius: 12px;
             box-shadow: var(--shadow);
             margin-bottom: 16px;
             overflow: hidden;
         }
-        .card-body {
-            padding: 16px;
+        .card-pad { padding: 16px; }
+        .section-title {
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
-        /* Post Composer */
-        .composer {
-            padding: 16px;
-        }
-        .composer-top {
+
+        /* CREATE POST */
+        .create-post {}
+        .post-input-row {
             display: flex;
             gap: 10px;
             align-items: center;
         }
-        .avatar {
+        .post-avatar {
             width: 40px;
             height: 40px;
             border-radius: 50%;
             object-fit: cover;
-            cursor: pointer;
             flex-shrink: 0;
         }
-        .avatar-lg {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid white;
-            cursor: pointer;
-        }
-        .composer-input {
+        .post-textarea {
             flex: 1;
             background: var(--bg);
-            border: none;
+            border: 2px solid transparent;
             padding: 10px 16px;
             border-radius: 24px;
-            font-size: 0.95rem;
+            font-size: 15px;
             outline: none;
+            resize: none;
+            font-family: inherit;
+            min-height: 44px;
+            transition: 0.2s;
             cursor: pointer;
-            font-family: inherit;
         }
-        .composer-expanded {
-            display: none;
-            margin-top: 10px;
-        }
-        .composer-textarea {
-            width: 100%;
-            background: var(--bg);
-            border: none;
-            padding: 12px 16px;
+        .post-textarea:focus { border-color: var(--blue); background: white; }
+        .post-textarea.expanded {
             border-radius: 12px;
-            font-size: 0.95rem;
-            outline: none;
-            resize: vertical;
             min-height: 80px;
-            font-family: inherit;
+            cursor: text;
         }
-        .composer-actions {
+        .post-actions-row {
             display: flex;
             gap: 8px;
             margin-top: 10px;
-            flex-wrap: wrap;
-            align-items: center;
+            padding-top: 10px;
+            border-top: 1px solid var(--border);
         }
-        .composer-btn {
+        .post-action-btn {
+            flex: 1;
             display: flex;
             align-items: center;
-            gap: 5px;
+            justify-content: center;
+            gap: 6px;
             background: none;
             border: none;
-            padding: 8px 12px;
+            padding: 8px;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 0.85rem;
             font-weight: 500;
-            color: var(--text2);
+            font-size: 13px;
+            color: var(--gray);
             transition: 0.2s;
         }
-        .composer-btn:hover {
-            background: var(--hover);
-        }
-        .submit-btn {
-            background: var(--primary);
+        .post-action-btn:hover { background: #f0f2f5; }
+        .submit-post-btn {
+            background: var(--blue);
             color: white;
             border: none;
-            padding: 10px 24px;
+            padding: 10px 28px;
             border-radius: 8px;
             font-weight: 600;
             cursor: pointer;
-            font-size: 0.9rem;
-            margin-left: auto;
+            font-size: 14px;
+            transition: 0.2s;
         }
-        .submit-btn:hover {
-            background: #1664d9;
-        }
+        .submit-post-btn:hover { background: #1664d9; }
         .media-preview-wrap {
-            margin-top: 8px;
+            margin-top: 10px;
             position: relative;
             display: inline-block;
         }
-        .media-preview-wrap img,
-        .media-preview-wrap video {
+        .media-preview-wrap img, .media-preview-wrap video {
             max-width: 250px;
             max-height: 250px;
             border-radius: 8px;
             object-fit: cover;
         }
-        .remove-media {
+        .remove-media-btn {
             position: absolute;
             top: -8px;
             right: -8px;
             width: 26px;
             height: 26px;
-            background: var(--danger);
+            background: var(--red);
             color: white;
             border-radius: 50%;
             border: none;
             cursor: pointer;
             font-size: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
-        /* Post Card */
-        .post {
-            padding: 0;
-        }
-        .post-header {
+
+        /* POST CARD */
+        .post-card {}
+        .post-top {
             display: flex;
             padding: 12px 16px;
             gap: 10px;
             align-items: center;
         }
-        .post-info {
-            flex: 1;
-        }
-        .post-name {
+        .post-info { flex: 1; }
+        .post-author {
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 14px;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
         }
-        .post-name:hover {
-            text-decoration: underline;
-        }
-        .post-time {
-            font-size: 0.75rem;
-            color: var(--text2);
-        }
-        .verified-icon {
-            color: var(--primary);
-            font-size: 0.85rem;
-            margin-left: 2px;
-        }
-        .post-delete {
+        .post-author:hover { text-decoration: underline; }
+        .verified-badge { color: var(--blue); font-size: 14px; }
+        .post-meta { font-size: 12px; color: var(--gray); }
+        .post-delete-btn {
             background: none;
             border: none;
             cursor: pointer;
-            color: var(--text2);
-            font-size: 1.1rem;
+            color: var(--gray);
+            font-size: 18px;
             padding: 4px 8px;
             border-radius: 50%;
         }
-        .post-delete:hover {
-            background: var(--hover);
-        }
-        .post-text {
-            padding: 0 16px 10px;
+        .post-delete-btn:hover { background: #f0f2f5; }
+        .post-body { padding: 0 16px 10px; }
+        .post-text-content {
+            font-size: 15px;
+            line-height: 1.5;
             word-break: break-word;
             white-space: pre-wrap;
-            font-size: 0.95rem;
-            line-height: 1.5;
         }
-        .post-media {
+        .post-media-content {
             width: 100%;
             max-height: 450px;
             object-fit: cover;
             cursor: pointer;
+            margin-top: 8px;
         }
-        .post-stats {
+        .post-stats-bar {
             padding: 8px 16px;
             display: flex;
             justify-content: space-between;
-            font-size: 0.85rem;
-            color: var(--text2);
+            font-size: 13px;
+            color: var(--gray);
         }
-        .post-buttons {
+        .post-buttons-bar {
             display: flex;
             border-top: 1px solid var(--border);
             margin: 0 12px;
@@ -363,28 +336,53 @@
             border-radius: 4px;
             cursor: pointer;
             font-weight: 600;
-            font-size: 0.85rem;
-            color: var(--text2);
+            font-size: 13px;
+            color: var(--gray);
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 5px;
             transition: 0.2s;
         }
-        .post-btn:hover {
-            background: var(--hover);
+        .post-btn:hover { background: #f0f2f5; }
+        .post-btn.liked { color: var(--blue); }
+
+        /* REACTIONS */
+        .reactions-popup {
+            display: none;
+            position: absolute;
+            bottom: 100%;
+            left: 0;
+            background: white;
+            border-radius: 20px;
+            padding: 5px 10px;
+            box-shadow: var(--shadow-lg);
+            z-index: 10;
+            white-space: nowrap;
         }
-        .post-btn.liked {
-            color: var(--primary);
+        .reactions-popup button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            padding: 4px;
+            transition: 0.15s;
         }
-        /* Comments */
-        .comments-section {
+        .reactions-popup button:hover { transform: scale(1.3); }
+        .reaction-btn-wrap {
+            position: relative;
+            flex: 1;
+            display: flex;
+        }
+
+        /* COMMENTS */
+        .comments-panel {
+            display: none;
             padding: 10px 16px;
             background: var(--bg);
             border-top: 1px solid var(--border);
-            display: none;
         }
-        .comment {
+        .comment-item {
             display: flex;
             gap: 8px;
             margin-bottom: 8px;
@@ -399,21 +397,10 @@
             object-fit: cover;
             flex-shrink: 0;
         }
-        .comment-body {
-            flex: 1;
-        }
-        .comment-name {
-            font-weight: 600;
-            font-size: 0.8rem;
-        }
-        .comment-text {
-            font-size: 0.85rem;
-            word-break: break-word;
-        }
-        .comment-time {
-            font-size: 0.7rem;
-            color: var(--text2);
-        }
+        .comment-bubble { flex: 1; }
+        .comment-author { font-weight: 600; font-size: 12px; }
+        .comment-text { font-size: 13px; word-break: break-word; }
+        .comment-time { font-size: 11px; color: var(--gray); }
         .comment-form {
             display: flex;
             gap: 8px;
@@ -427,155 +414,95 @@
             border-radius: 20px;
             border: 1px solid var(--border);
             outline: none;
-            font-size: 0.85rem;
+            font-size: 13px;
             font-family: inherit;
             background: white;
         }
-        .comment-submit {
-            background: var(--primary);
+        .comment-input:focus { border-color: var(--blue); }
+        .comment-send {
+            background: var(--blue);
             color: white;
             border: none;
             padding: 8px 16px;
             border-radius: 20px;
             cursor: pointer;
             font-weight: 500;
+            font-size: 13px;
         }
-        /* Profile */
-        .profile-cover {
-            height: 280px;
-            background-size: cover;
-            background-position: center;
-            border-radius: 12px 12px 0 0;
-            position: relative;
-            cursor: pointer;
-        }
-        .profile-cover button {
-            position: absolute;
-            bottom: 16px;
-            right: 16px;
-            background: rgba(0,0,0,0.6);
-            color: white;
-            border: none;
-            padding: 8px 14px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 500;
-        }
-        .profile-info {
-            padding: 0 20px 20px;
-            position: relative;
-            margin-top: -60px;
-        }
-        .profile-pic-wrap {
-            position: relative;
-            display: inline-block;
-        }
-        .profile-pic-wrap button {
-            position: absolute;
-            bottom: 8px;
-            right: 8px;
-            background: var(--bg);
-            border: none;
-            border-radius: 50%;
-            width: 34px;
-            height: 34px;
-            cursor: pointer;
-            font-size: 0.9rem;
+
+        /* SIDEBARS */
+        .sidebar-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
             box-shadow: var(--shadow);
         }
-        .profile-name {
-            font-size: 1.8rem;
-            font-weight: 800;
-            margin-top: 8px;
+        .sidebar-profile {
+            text-align: center;
         }
-        .profile-bio {
-            color: var(--text);
-            margin-top: 4px;
-        }
-        .profile-stats {
-            display: flex;
-            gap: 20px;
-            margin-top: 10px;
-            font-size: 0.9rem;
-            color: var(--text2);
-        }
-        .profile-stats b {
-            color: var(--text);
-        }
-        .profile-actions {
-            margin-top: 10px;
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-        .btn {
-            padding: 8px 16px;
-            border-radius: 6px;
-            font-weight: 600;
+        .sidebar-profile img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
             cursor: pointer;
-            border: none;
-            font-size: 0.85rem;
+        }
+        .sidebar-profile h4 { margin-top: 8px; }
+        .sidebar-stats {
             display: flex;
-            align-items: center;
-            gap: 5px;
+            justify-content: space-around;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid var(--border);
+            font-size: 12px;
+            color: var(--gray);
+        }
+        .sidebar-stats div { text-align: center; }
+        .sidebar-stats strong { display: block; color: var(--text); font-size: 16px; }
+        .news-item {
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
             transition: 0.2s;
         }
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-        }
-        .btn-primary:hover {
-            background: #1664d9;
-        }
-        .btn-outline {
-            background: var(--bg);
-            color: var(--text);
-            border: 1px solid var(--border);
-        }
-        .btn-outline:hover {
-            background: #d8dadf;
-        }
-        .btn-success {
-            background: var(--success);
-            color: white;
-        }
-        .btn-danger {
-            background: var(--danger);
-            color: white;
-        }
-        /* Profile Tabs */
-        .profile-tabs {
-            display: flex;
-            border-bottom: 1px solid var(--border);
-            padding: 0 20px;
-            background: var(--card);
-            border-radius: 0 0 12px 12px;
-        }
-        .profile-tab {
-            padding: 12px 20px;
-            cursor: pointer;
+        .news-item:hover { background: #f9f9f9; margin: 0 -16px; padding: 8px 16px; }
+        .news-item:last-child { border-bottom: none; }
+        .news-title {
             font-weight: 600;
-            font-size: 0.9rem;
-            border-bottom: 3px solid transparent;
-            color: var(--text2);
-            background: none;
-            border-top: none;
-            border-left: none;
-            border-right: none;
+            font-size: 13px;
+            margin-bottom: 2px;
         }
-        .profile-tab.active {
-            color: var(--primary);
-            border-bottom-color: var(--primary);
+        .news-source {
+            font-size: 11px;
+            color: var(--gray);
         }
-        /* Marketplace */
+        .news-image {
+            width: 100%;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-top: 4px;
+        }
+        .trending-tag {
+            display: inline-block;
+            background: #e8f0fe;
+            color: var(--blue);
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            margin: 2px;
+        }
+
+        /* MARKETPLACE */
         .market-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 16px;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 12px;
             padding: 16px;
         }
         .market-item {
-            background: var(--card);
+            background: var(--white);
             border-radius: 10px;
             overflow: hidden;
             box-shadow: var(--shadow);
@@ -584,44 +511,37 @@
         }
         .market-item:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            box-shadow: var(--shadow-lg);
         }
         .market-item img {
             width: 100%;
-            height: 170px;
+            height: 150px;
             object-fit: cover;
         }
-        .market-item .info {
-            padding: 12px;
-        }
+        .market-item-body { padding: 10px; }
         .market-price {
-            font-size: 1.2rem;
+            font-size: 18px;
             font-weight: 800;
-            color: var(--primary);
+            color: var(--blue);
         }
-        .market-title {
-            font-weight: 600;
-            margin: 4px 0;
-        }
-        .market-location {
-            font-size: 0.8rem;
-            color: var(--text2);
-        }
-        .boost-badge {
-            background: var(--warning);
+        .market-title { font-weight: 600; font-size: 14px; margin: 3px 0; }
+        .market-loc { font-size: 12px; color: var(--gray); }
+        .boost-tag {
+            background: var(--yellow);
             color: #000;
             padding: 2px 8px;
             border-radius: 10px;
-            font-size: 0.7rem;
+            font-size: 10px;
             font-weight: 700;
             display: inline-block;
-            margin-top: 4px;
+            margin-top: 3px;
         }
-        /* Live */
+
+        /* LIVE */
         .live-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 16px;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 12px;
             padding: 16px;
         }
         .live-card {
@@ -638,98 +558,81 @@
             object-fit: cover;
             opacity: 0.8;
         }
-        .live-badge {
+        .live-indicator {
             position: absolute;
             top: 10px;
             left: 10px;
-            background: var(--danger);
+            background: var(--red);
             color: white;
             padding: 4px 10px;
             border-radius: 15px;
-            font-size: 0.75rem;
+            font-size: 12px;
             font-weight: 700;
             animation: pulse 1.5s infinite;
         }
-        @keyframes pulse {
-            0%,
-            100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.5;
-            }
-        }
+        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
         .live-viewers {
             position: absolute;
             bottom: 10px;
             left: 10px;
             color: white;
-            font-size: 0.8rem;
+            font-size: 12px;
             background: rgba(0,0,0,0.6);
             padding: 3px 8px;
             border-radius: 4px;
         }
-        .live-title {
+        .live-name {
             position: absolute;
             bottom: 10px;
             right: 10px;
             color: white;
             font-weight: 600;
-            font-size: 0.85rem;
+            font-size: 13px;
             text-shadow: 0 1px 2px rgba(0,0,0,0.8);
         }
-        /* Messenger */
-        .messenger-layout {
+
+        /* CHAT */
+        .chat-container {
             display: flex;
-            height: calc(100vh - 100px);
-            background: var(--card);
+            height: calc(100vh - 120px);
+            background: var(--white);
             border-radius: 12px;
             overflow: hidden;
         }
         .chat-sidebar {
-            width: 320px;
+            width: 300px;
             border-right: 1px solid var(--border);
             display: flex;
             flex-direction: column;
         }
-        .chat-search {
-            padding: 12px;
-        }
+        .chat-search { padding: 10px; }
         .chat-search input {
             width: 100%;
-            padding: 10px 14px;
+            padding: 8px 12px;
             border-radius: 20px;
             border: 1px solid var(--border);
             background: var(--bg);
             outline: none;
-            font-size: 0.9rem;
+            font-size: 13px;
         }
-        .chat-list {
-            flex: 1;
-            overflow-y: auto;
-        }
+        .chat-list { flex: 1; overflow-y: auto; }
         .chat-user {
             display: flex;
             align-items: center;
             gap: 10px;
-            padding: 10px 14px;
+            padding: 10px 12px;
             cursor: pointer;
             transition: 0.2s;
         }
-        .chat-user:hover,
-        .chat-user.active {
-            background: var(--hover);
-        }
-        .chat-user .name {
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
+        .chat-user:hover, .chat-user.active { background: #f0f2f5; }
+        .chat-user img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
+        .chat-user-name { font-weight: 600; font-size: 13px; }
         .chat-main {
             flex: 1;
             display: flex;
             flex-direction: column;
         }
-        .chat-header {
+        .chat-header-bar {
             padding: 12px 16px;
             border-bottom: 1px solid var(--border);
             display: flex;
@@ -737,73 +640,72 @@
             gap: 10px;
             font-weight: 600;
         }
-        .chat-messages {
+        .chat-msgs {
             flex: 1;
             overflow-y: auto;
             padding: 16px;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
             background: var(--bg);
         }
-        .msg {
+        .msg-bubble {
             max-width: 70%;
             padding: 10px 14px;
             border-radius: 18px;
-            font-size: 0.9rem;
+            font-size: 14px;
             word-break: break-word;
             line-height: 1.4;
         }
-        .msg.sent {
+        .msg-sent {
             align-self: flex-end;
-            background: var(--primary);
+            background: var(--blue);
             color: white;
             border-bottom-right-radius: 4px;
         }
-        .msg.received {
+        .msg-received {
             align-self: flex-start;
             background: #e4e6eb;
             border-bottom-left-radius: 4px;
         }
-        .msg .time {
-            font-size: 0.65rem;
-            opacity: 0.7;
-            margin-top: 3px;
-            text-align: right;
-        }
-        .chat-input-area {
-            padding: 12px 16px;
+        .msg-time { font-size: 10px; opacity: 0.7; margin-top: 3px; text-align: right; }
+        .chat-input-bar {
+            padding: 10px 16px;
             border-top: 1px solid var(--border);
             display: flex;
             gap: 8px;
         }
-        .chat-input-area input {
+        .chat-input-bar input {
             flex: 1;
             padding: 10px 16px;
             border-radius: 24px;
             border: 1px solid var(--border);
             outline: none;
-            font-size: 0.9rem;
+            font-size: 14px;
             font-family: inherit;
         }
-        .chat-input-area button {
+        .chat-send-btn {
             width: 42px;
             height: 42px;
             border-radius: 50%;
-            background: var(--primary);
+            background: var(--blue);
             color: white;
             border: none;
             cursor: pointer;
-            font-size: 1.1rem;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        /* Friends */
+
+        /* FRIENDS PAGE */
         .friends-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
             gap: 12px;
         }
         .friend-card {
-            background: var(--card);
+            background: var(--white);
             border-radius: 10px;
             padding: 16px;
             text-align: center;
@@ -816,58 +718,9 @@
             object-fit: cover;
             cursor: pointer;
         }
-        .friend-card h4 {
-            margin: 8px 0 4px;
-            font-size: 0.95rem;
-        }
-        /* Notifications */
-        .notif-item {
-            display: flex;
-            gap: 10px;
-            padding: 14px 16px;
-            border-bottom: 1px solid var(--border);
-            align-items: center;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .notif-item:hover {
-            background: var(--hover);
-        }
-        .notif-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            flex-shrink: 0;
-        }
-        .notif-icon.like {
-            background: #e8f0fe;
-            color: var(--primary);
-        }
-        .notif-icon.comment {
-            background: #e8f5e9;
-            color: var(--success);
-        }
-        .notif-icon.friend {
-            background: #fff3e0;
-            color: var(--warning);
-        }
-        .notif-icon.msg {
-            background: #f3e5f5;
-            color: #9c27b0;
-        }
-        .notif-text {
-            font-size: 0.9rem;
-            flex: 1;
-        }
-        .notif-time {
-            font-size: 0.75rem;
-            color: var(--text2);
-        }
-        /* Modal */
+        .friend-card h4 { margin: 8px 0 4px; font-size: 14px; }
+
+        /* MODALS */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -881,32 +734,23 @@
         .modal-box {
             background: white;
             border-radius: 14px;
+            padding: 24px;
             width: 100%;
             max-width: 500px;
             max-height: 85vh;
             overflow-y: auto;
-            padding: 24px;
         }
-        .modal-box h3 {
-            margin-bottom: 16px;
-            font-size: 1.2rem;
-        }
-        .modal-box input,
-        .modal-box textarea,
-        .modal-box select {
+        .modal-box h3 { margin-bottom: 16px; }
+        .modal-box input, .modal-box textarea, .modal-box select {
             width: 100%;
-            padding: 10px 14px;
+            padding: 10px;
             border: 1px solid var(--border);
             border-radius: 8px;
-            font-size: 0.9rem;
-            margin-bottom: 12px;
-            outline: none;
+            font-size: 14px;
+            margin-bottom: 10px;
             font-family: inherit;
             background: var(--bg);
-        }
-        .modal-box textarea {
-            resize: vertical;
-            min-height: 70px;
+            outline: none;
         }
         .modal-actions {
             display: flex;
@@ -914,8 +758,9 @@
             justify-content: flex-end;
             margin-top: 16px;
         }
-        /* Fullscreen viewer */
-        .fullscreen {
+
+        /* FULLSCREEN VIEWER */
+        .fullscreen-viewer {
             position: fixed;
             inset: 0;
             background: rgba(0,0,0,0.95);
@@ -925,1229 +770,763 @@
             justify-content: center;
             cursor: pointer;
         }
-        .fullscreen img,
-        .fullscreen video {
+        .fullscreen-viewer img, .fullscreen-viewer video {
             max-width: 95%;
             max-height: 95%;
             border-radius: 8px;
         }
-        /* Settings toggles */
-        .toggle-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 0;
-            border-bottom: 1px solid var(--border);
-        }
-        .toggle-row:last-child {
-            border-bottom: none;
-        }
-        .toggle-sw {
-            width: 48px;
-            height: 26px;
-            background: #ccc;
-            border-radius: 26px;
+        .fullscreen-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 36px;
             cursor: pointer;
-            position: relative;
+        }
+
+        /* NOTIFICATIONS */
+        .notif-item {
+            display: flex;
+            gap: 10px;
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
             transition: 0.2s;
+        }
+        .notif-item:hover { background: #f9f9f9; }
+        .notif-icon-circle {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
             flex-shrink: 0;
         }
-        .toggle-sw.on {
-            background: var(--primary);
-        }
-        .toggle-sw::after {
-            content: '';
-            position: absolute;
-            width: 22px;
-            height: 22px;
-            background: white;
-            border-radius: 50%;
-            top: 2px;
-            left: 3px;
-            transition: 0.2s;
-        }
-        .toggle-sw.on::after {
-            left: 23px;
-        }
+        .notif-icon-circle.like { background: #e8f0fe; color: var(--blue); }
+        .notif-icon-circle.comment { background: #e8f5e9; color: var(--green); }
+        .notif-icon-circle.friend { background: #fff3e0; color: var(--yellow); }
+        .notif-icon-circle.msg { background: #f3e5f5; color: #9c27b0; }
+
         .empty-state {
             text-align: center;
             padding: 40px;
-            color: var(--text2);
+            color: var(--gray);
         }
-        .empty-state i {
-            font-size: 48px;
-            margin-bottom: 10px;
-            display: block;
-        }
-        /* Emoji picker */
-        .emoji-bar {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 4px;
-            padding: 6px 0;
-        }
-        .emoji-bar button {
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 1.3rem;
-            padding: 4px 6px;
-            border-radius: 4px;
-            transition: 0.15s;
-        }
-        .emoji-bar button:hover {
-            background: #e4e6eb;
-            transform: scale(1.2);
-        }
-        .reaction-emojis {
-            display: flex;
-            gap: 4px;
-            padding: 4px 0;
-        }
-        .reaction-emojis button {
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 1.1rem;
-            padding: 4px 8px;
-            border-radius: 50%;
-            transition: 0.15s;
-        }
-        .reaction-emojis button:hover {
-            background: #e4e6eb;
-            transform: scale(1.3);
-        }
-        @media (max-width: 768px) {
-            .nav-tab span {
-                display: none;
-            }
-            .nav-tab {
-                padding: 8px 10px;
-            }
-            .main-container {
-                padding: 0 10px;
-            }
-            .messenger-layout {
-                flex-direction: column;
-            }
-            .chat-sidebar {
-                width: 100%;
-                max-height: 200px;
-            }
-        }
+        .empty-state i { font-size: 48px; margin-bottom: 10px; display: block; }
+
+        .emoji-bar { display: flex; flex-wrap: wrap; gap: 2px; padding: 4px 0; }
+        .emoji-bar button { background: none; border: none; cursor: pointer; font-size: 16px; padding: 2px 4px; border-radius: 4px; transition: 0.15s; }
+        .emoji-bar button:hover { background: #e4e6eb; transform: scale(1.2); }
     </style>
 </head>
 <body>
-    <div id="app"></div>
+<div id="app"></div>
 
-    <script>
-        // ==================== DATABASE ====================
-        const LS = {
-            get(k, d) { try { const v = localStorage.getItem('wfg_' + k); return v ? JSON.parse(v) : d; } catch (e) { return d; } },
-            set(k, v) { localStorage.setItem('wfg_' + k, JSON.stringify(v)); }
-        };
+<script>
+// ==================== WORLD-FG COMPLETE SOCIAL PLATFORM ====================
 
-        function getUsers() { return LS.get('users', []); }
+// Database
+const DB = {
+    _get(k, d) { try { const v = localStorage.getItem('wfg_'+k); return v ? JSON.parse(v) : d; } catch(e) { return d; } },
+    _set(k, v) { localStorage.setItem('wfg_'+k, JSON.stringify(v)); },
+    get users() { return this._get('users', []); },
+    set users(v) { this._set('users', v); },
+    get session() { return this._get('session', null); },
+    set session(v) { this._set('session', v); },
+    get posts() { return this._get('posts', []); },
+    set posts(v) { this._set('posts', v); },
+    get friends() { return this._get('friends', []); },
+    set friends(v) { this._set('friends', v); },
+    get friendReqs() { return this._get('friendReqs', []); },
+    set friendReqs(v) { this._set('friendReqs', v); },
+    get messages() { return this._get('messages', []); },
+    set messages(v) { this._set('messages', v); },
+    get notifs() { return this._get('notifs', []); },
+    set notifs(v) { this._set('notifs', v); },
+    get market() { return this._get('market', []); },
+    set market(v) { this._set('market', v); },
+    get live() { return this._get('live', []); },
+    set live(v) { this._set('live', v); },
+    get verified() { return this._get('verified', []); },
+    set verified(v) { this._set('verified', v); },
+    get settings() { return this._get('settings', {notifs:true,privacy:'public',dark:false}); },
+    set settings(v) { this._set('settings', v); }
+};
 
-        function setUsers(v) { LS.set('users', v); }
-
-        function getSession() { return LS.get('session', null); }
-
-        function setSession(v) { LS.set('session', v); }
-
-        function getPosts() { return LS.get('posts', []); }
-
-        function setPosts(v) { LS.set('posts', v); }
-
-        function getFriendReqs() { return LS.get('friendReqs', []); }
-
-        function setFriendReqs(v) { LS.set('friendReqs', v); }
-
-        function getFriendships() { return LS.get('friendships', []); }
-
-        function setFriendships(v) { LS.set('friendships', v); }
-
-        function getNotifs() { return LS.get('notifs', []); }
-
-        function setNotifs(v) { LS.set('notifs', v); }
-
-        function getMessages() { return LS.get('messages', []); }
-
-        function setMessages(v) { LS.set('messages', v); }
-
-        function getSettings() { return LS.get('settings', { notifs: true, privacy: 'public', twoFactor: false }); }
-
-        function setSettings(v) { LS.set('settings', v); }
-
-        function getMarketplace() { return LS.get('marketplace', []); }
-
-        function setMarketplace(v) { LS.set('marketplace', v); }
-
-        function getLivestreams() { return LS.get('livestreams', []); }
-
-        function setLivestreams(v) { LS.set('livestreams', v); }
-
-        function getVerifications() { return LS.get('verifications', []); }
-
-        function setVerifications(v) { LS.set('verifications', v); }
-
-        let currentPage = 'feed';
-        let currentChatId = null;
-        let pendingMedia = null;
-        let pendingMediaType = null;
-
-        function currentUser() { const s = getSession(); return s ? getUsers().find(u => u.id === s.userId) : null; }
-
-        function isVerified(uid) { return getVerifications().includes(uid); }
-
-        function addNotif(uid, msg, type) {
-            if (!getSettings().notifs) return;
-            const n = getNotifs();
-            n.unshift({ id: Date.now(), userId: uid, message: msg, type: type, read: false, time: new Date().toLocaleString() });
-            setNotifs(n);
-        }
-
-        // ==================== AUTH ====================
-        function login(email, pw) {
-            const u = getUsers().find(x => x.email.toLowerCase() === email.toLowerCase() && x.password === pw);
-            if (u) { setSession({ userId: u.id }); return true; }
-            return false;
-        }
-
-        function register(data) {
-            if (getUsers().find(x => x.email.toLowerCase() === data.email.toLowerCase())) return false;
-            const users = getUsers();
-            const nu = {
-                id: Date.now(),
-                fullname: data.fullname,
-                email: data.email,
-                password: data.password,
-                dob: data.dob || '',
-                marital: data.marital || '',
-                address: data.address || '',
-                bio: data.bio || '',
-                profilePic: 'https://ui-avatars.com/api/?name=' + encodeURIComponent(data.fullname) +
-                    '&background=1877f2&color=fff&size=200&bold=true',
-                coverPic: 'https://picsum.photos/id/10' + (users.length + 1) + '/1200/400',
-                media: [],
-                followers: [],
-                following: [],
-                createdAt: new Date().toISOString()
-            };
-            users.push(nu);
-            setUsers(users);
-            return true;
-        }
-
-        function logout() {
-            setSession(null);
-            currentChatId = null;
-            render();
-        }
-
-        // ==================== POSTS ====================
-        function createPost(text, mediaUrl, mediaType) {
-            const u = currentUser();
-            const post = {
-                id: Date.now(),
-                userId: u.id,
-                text: text || '',
-                mediaUrl: mediaUrl || null,
-                mediaType: mediaType || null,
-                likes: [],
-                reactions: {},
-                comments: [],
-                timestamp: Date.now(),
-                isMarketplace: false
-            };
-            const posts = getPosts();
-            posts.unshift(post);
-            setPosts(posts);
-            (u.followers || []).forEach(fid => addNotif(fid, u.fullname + ' posted something new', 'post'));
-            return post;
-        }
-
-        function deletePost(pid) { setPosts(getPosts().filter(p => p.id !== pid)); }
-
-        function reactPost(pid, emoji) {
-            const posts = getPosts();
-            const post = posts.find(p => p.id === pid);
-            const uid = currentUser().id;
-            if (post) {
-                post.reactions[uid] = emoji;
-                if (post.userId !== uid) addNotif(post.userId, currentUser().fullname + ' reacted ' + emoji + ' to your post',
-                    'like');
-                setPosts(posts);
-            }
-        }
-
-        function addComment(pid, text) {
-            const posts = getPosts();
-            const post = posts.find(p => p.id === pid);
-            if (post && text.trim()) {
-                post.comments.push({ userId: currentUser().id, username: currentUser().fullname, text: text.trim(),
-                    timestamp: Date.now() });
-                if (post.userId !== currentUser().id) addNotif(post.userId,
-                    currentUser().fullname + ' commented: "' + text.trim().slice(0, 40) + '"', 'comment');
-                setPosts(posts);
-            }
-        }
-
-        // ==================== SOCIAL ====================
-        function followUser(tid) {
-            const u = currentUser();
-            if (u.id === tid) return;
-            const users = getUsers();
-            const cu = users.find(x => x.id === u.id);
-            const tu = users.find(x => x.id === tid);
-            if (!cu.following) cu.following = [];
-            if (!tu.followers) tu.followers = [];
-            if (!cu.following.includes(tid)) {
-                cu.following.push(tid);
-                tu.followers.push(u.id);
-                setUsers(users);
-                addNotif(tid, u.fullname + ' started following you 👋', 'follow');
-            }
-        }
-
-        function unfollowUser(tid) {
-            const users = getUsers();
-            const cu = users.find(x => x.id === currentUser().id);
-            const tu = users.find(x => x.id === tid);
-            if (cu.following) cu.following = cu.following.filter(id => id !== tid);
-            if (tu.followers) tu.followers = tu.followers.filter(id => id !== currentUser().id);
-            setUsers(users);
-        }
-
-        function isFollowing(uid, tid) {
-            const u = getUsers().find(x => x.id === uid);
-            return u?.following?.includes(tid) || false;
-        }
-
-        function sendFriendReq(toId) {
-            const fid = currentUser().id;
-            if (fid === toId) return;
-            const reqs = getFriendReqs();
-            if (reqs.some(r => r.fromId === fid && r.toId === toId)) return;
-            if (getFriendships().some(f => f.userId === fid && f.friendId === toId)) return;
-            reqs.push({ id: Date.now(), fromId: fid, toId: toId });
-            setFriendReqs(reqs);
-            addNotif(toId, currentUser().fullname + ' sent you a friend request 🤝', 'friend_request');
-        }
-
-        function acceptReq(rid) {
-            const reqs = getFriendReqs();
-            const req = reqs.find(r => r.id === rid);
-            if (req && req.toId === currentUser().id) {
-                const fs = getFriendships();
-                fs.push({ userId: req.fromId, friendId: req.toId, status: 'accepted' });
-                fs.push({ userId: req.toId, friendId: req.fromId, status: 'accepted' });
-                setFriendships(fs);
-                setFriendReqs(reqs.filter(r => r.id !== rid));
-                addNotif(req.fromId, currentUser().fullname + ' accepted your friend request ✅', 'friend_accept');
-            }
-        }
-
-        function rejectReq(rid) { setFriendReqs(getFriendReqs().filter(r => r.id !== rid)); }
-
-        function getFriends(uid) { return getFriendships().filter(f => f.userId === uid && f.status === 'accepted').map(f => f
-                .friendId); }
-
-        function isFriend(a, b) { return getFriendships().some(f => f.userId === a && f.friendId === b && f.status ===
-                'accepted'); }
-
-        // ==================== MESSAGES ====================
-        function sendMsg(toId, text) {
-            if (!text.trim()) return;
-            const msgs = getMessages();
-            msgs.push({ id: Date.now(), fromId: currentUser().id, toId, text: text.trim(), timestamp: Date.now() });
-            setMessages(msgs);
-            addNotif(toId, '💬 New message from ' + currentUser().fullname, 'message');
-        }
-
-        function getChatMsgs(otherId) {
-            const uid = currentUser().id;
-            return getMessages().filter(m => (m.fromId === uid && m.toId === otherId) || (m.fromId === otherId && m.toId ===
-                uid)).sort((a, b) => a.timestamp - b.timestamp);
-        }
-
-        // ==================== PROFILE ====================
-        function updateProfilePic(url) { const u = getUsers(); const cu = u.find(x => x.id === currentUser().id);
-            cu.profilePic = url;
-            setUsers(u); }
-
-        function updateCoverPic(url) { const u = getUsers(); const cu = u.find(x => x.id === currentUser().id);
-            cu.coverPic = url;
-            setUsers(u); }
-
-        function updateProfile(data) { const u = getUsers(); const cu = u.find(x => x.id === currentUser().id); if (data
-                .fullname) cu.fullname = data.fullname;
-            cu.bio = data.bio || '';
-            cu.marital = data.marital || '';
-            cu.address = data.address || '';
-            cu.dob = data.dob || '';
-            setUsers(u); }
-
-        function uploadMedia(type, url) { const u = getUsers(); const cu = u.find(x => x.id === currentUser().id);
-            cu.media.push({ type, url,
-                uploadedAt: Date.now() });
-            setUsers(u); }
-
-        function deleteMedia(idx) { const u = getUsers(); const cu = u.find(x => x.id === currentUser().id);
-            cu.media.splice(idx, 1);
-            setUsers(u); }
-
-        function requestVerification() {
-            if (isVerified(currentUser().id)) return alert('You are already verified! ✅');
-            if (confirm('Request profile verification? Our team will review your profile.')) {
-                const v = getVerifications();
-                v.push(currentUser().id);
-                setVerifications(v);
-                alert('✅ Verification submitted! You now have the blue badge.');
-                render();
-            }
-        }
-
-        function createListing(text, mediaUrl, price, cat, loc) {
-            const listing = {
-                id: Date.now(),
-                userId: currentUser().id,
-                text,
-                mediaUrl: mediaUrl || 'https://picsum.photos/seed/m' + Date.now() + '/400/300',
-                mediaType: 'image',
-                price,
-                category: cat,
-                location: loc,
-                boosted: false,
-                timestamp: Date.now()
-            };
-            const m = getMarketplace();
-            m.unshift(listing);
-            setMarketplace(m);
-            return listing;
-        }
-
-        function boostListing(lid) {
-            const m = getMarketplace();
-            const l = m.find(x => x.id === lid);
-            if (l) { l.boosted = true;
-                setMarketplace(m);
-                alert('🚀 Listing boosted successfully! It will appear at the top for 7 days.'); }
-        }
-
-        function startLiveStream() {
-            const title = prompt('🎥 Enter your live stream title:');
-            if (!title) return;
-            const ls = getLivestreams();
-            ls.push({ id: Date.now(), userId: currentUser().id, title, thumbnail: currentUser().profilePic, viewers: Math.floor(
-                    Math.random() * 80), startedAt: Date.now() });
-            setLivestreams(ls);
-            alert('🔴 You are now LIVE! (Simulated)');
-            render();
-        }
-
-        // ==================== HELPERS ====================
-        function esc(s) { if (!s) return ''; return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g,
-                '&gt;').replace(/"/g, '&quot;'); }
-
-        function timeAgo(ts) { const d = Date.now() - ts; const m = Math.floor(d / 60000); if (m < 1) return 'Just now'; if (m <
-                60) return m + 'm'; const h = Math.floor(m / 60); if (h < 24) return h + 'h'; const days = Math.floor(h / 24); if (
-                days < 7) return days + 'd'; return new Date(ts).toLocaleDateString(); }
-
-        function getFeedPosts() {
-            const u = currentUser();
-            const rel = [...new Set([u.id, ...(u.following || []), ...getFriends(u.id)])];
-            return getPosts().filter(p => rel.includes(p.userId)).sort((a, b) => b.timestamp - a.timestamp);
-        }
-
-        // ==================== EMOJI DATA ====================
-        const EMOJIS = ['😀', '😂', '🥰', '😍', '🤩', '😘', '😜', '🤗', '😎', '🤔', '😢', '😡', '👍', '👎', '👏', '🙌', '🔥',
-            '❤️', '💯', '🎉', '💪', '🙏', '😇', '🤝', '🌟', '✨', '💩', '👀', '🎵', '📸'
+// Initialize demo data
+function initDB() {
+    if (DB.users.length === 0) {
+        DB.users = [{
+            id: 1, name: "John Anderson", email: "test@test.com", password: "123456",
+            bio: "Welcome to WorldFG! 🌍 Connecting the world together.",
+            location: "San Francisco, CA", marital: "Married 💍", dob: "1992-05-15",
+            avatar: "https://i.pravatar.cc/200?img=68",
+            cover: "https://picsum.photos/id/1043/900/300",
+            joined: new Date().toISOString()
+        }, {
+            id: 2, name: "Sarah Williams", email: "sarah@test.com", password: "123456",
+            bio: "Travel enthusiast ✈️ | Food lover 🍕",
+            location: "New York, NY", marital: "Single", dob: "1995-08-22",
+            avatar: "https://i.pravatar.cc/200?img=47",
+            cover: "https://picsum.photos/id/1015/900/300",
+            joined: new Date(Date.now()-86400000*30).toISOString()
+        }, {
+            id: 3, name: "Mike Johnson", email: "mike@test.com", password: "123456",
+            bio: "Tech geek 💻 | Gamer 🎮 | Developer",
+            location: "Austin, TX", marital: "Married", dob: "1990-11-10",
+            avatar: "https://i.pravatar.cc/200?img=12",
+            cover: "https://picsum.photos/id/1025/900/300",
+            joined: new Date(Date.now()-86400000*60).toISOString()
+        }];
+        DB.posts = [
+            { id: 1, userId: 1, text: "🚀 Welcome to WorldFG! The ultimate social platform where you can connect, share, go live, sell on marketplace, and get verified! Start exploring now!", media: null, mediaType: null, reactions: {}, comments: [], time: Date.now()-3600000 },
+            { id: 2, userId: 2, text: "Just finished an amazing trip to Bali! 🌴 The beaches were incredible! 🏖️", media: "https://picsum.photos/id/1018/600/400", mediaType: "image", reactions: {1:"❤️"}, comments: [{userId:1,name:"John Anderson",text:"Looks amazing! 😍",time:Date.now()-1800000}], time: Date.now()-7200000 },
+            { id: 3, userId: 3, text: "Just built a new gaming PC! RTX 4090 + i9-14900K = absolute beast! 🔥🎮", media: "https://picsum.photos/id/20/600/400", mediaType: "image", reactions: {1:"🔥",2:"👍"}, comments: [], time: Date.now()-10800000 }
         ];
-        const REACTIONS = ['👍', '❤️', '😂', '😮', '😢', '😡'];
+        DB.friends = [
+            { userId: 1, friendId: 2 }, { userId: 2, friendId: 1 },
+            { userId: 1, friendId: 3 }, { userId: 3, friendId: 1 }
+        ];
+        DB.messages = [
+            { id: 1, from: 2, to: 1, text: "Hey John! How are you? 😊", time: Date.now()-3600000 },
+            { id: 2, from: 1, to: 2, text: "I'm great Sarah! Just working on WorldFG! 🚀", time: Date.now()-3500000 },
+            { id: 3, from: 2, to: 1, text: "That's awesome! Can't wait to see it! 👏", time: Date.now()-3400000 }
+        ];
+        DB.market = [
+            { id: 1, userId: 1, title: "Vintage Leather Jacket 🧥", price: "75", location: "San Francisco", image: "https://picsum.photos/seed/jacket/400/300", boosted: true, category: "Clothing", time: Date.now()-86400000 },
+            { id: 2, userId: 2, title: "MacBook Pro 2023 💻", price: "1200", location: "New York", image: "https://picsum.photos/seed/macbook/400/300", boosted: false, category: "Electronics", time: Date.now()-172800000 },
+            { id: 3, userId: 3, title: "Gaming Chair - Like New 🎮", price: "200", location: "Austin", image: "https://picsum.photos/seed/chair/400/300", boosted: true, category: "Furniture", time: Date.now()-259200000 }
+        ];
+        DB.live = [
+            { id: 1, userId: 2, title: "Chill Music & Chat 🎵", thumbnail: "https://picsum.photos/seed/live1/400/250", viewers: 42, time: Date.now()-1800000 },
+            { id: 2, userId: 3, title: "Gaming: Fortnite Tournament 🎮", thumbnail: "https://picsum.photos/seed/live2/400/250", viewers: 156, time: Date.now()-900000 }
+        ];
+        DB.verified = [1, 2];
+        DB.notifs = [
+            { id: 1, userId: 1, message: "Sarah Williams liked your post ❤️", type: "like", time: new Date(Date.now()-1800000).toLocaleString(), read: false },
+            { id: 2, userId: 1, message: "Mike Johnson reacted 🔥 to your post", type: "like", time: new Date(Date.now()-3600000).toLocaleString(), read: false },
+            { id: 3, userId: 1, message: "Sarah Williams sent you a message 💬", type: "msg", time: new Date(Date.now()-3600000).toLocaleString(), read: true }
+        ];
+    }
+}
+initDB();
 
-        function emojiBarHTML(inputId) {
-            return `<div class="emoji-bar">${EMOJIS.map(e => `<button onclick="insertEmoji('${inputId}','${e}')">${e}</button>`).join('')}</div>`;
-        }
+// App State
+let currentPage = 'feed';
+let currentChatUser = null;
+let pendingMedia = null;
+let pendingMediaType = null;
+let expandedComposer = false;
 
-        window.insertEmoji = function(inputId, emoji) {
-            const el = document.getElementById(inputId);
-            if (el) {
-                const start = el.selectionStart;
-                const end = el.selectionEnd;
-                el.value = el.value.substring(0, start) + emoji + el.value.substring(end);
-                el.focus();
-                el.selectionStart = el.selectionEnd = start + emoji.length;
-            }
-        };
+// Helpers
+function U() { return DB.session ? DB.users.find(u=>u.id===DB.session.userId) : null; }
+function esc(s) { if(!s) return ''; return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function timeAgo(ts) { const d=Date.now()-ts; const m=Math.floor(d/60000); if(m<1) return 'Just now'; if(m<60) return m+'m'; const h=Math.floor(m/60); if(h<24) return h+'h'; return Math.floor(h/24)+'d'; }
+function isVerified(uid) { return DB.verified.includes(uid); }
+function isFriend(uid) { return DB.friends.some(f=>(f.userId===U().id&&f.friendId===uid)||(f.userId===uid&&f.friendId===U().id)); }
+function getFriendsList() { return DB.friends.filter(f=>f.userId===U().id).map(f=>f.friendId); }
+function getUser(id) { return DB.users.find(u=>u.id===id); }
+function addNotif(uid, msg, type) { if(!DB.settings.notifs) return; const n=DB.notifs; n.unshift({id:Date.now(),userId:uid,message:msg,type:type,time:new Date().toLocaleString(),read:false}); DB.notifs=n; }
 
-        // ==================== RENDER ====================
-        function render() {
-            const user = currentUser();
-            if (!user) { renderAuth(); return; }
-            const reqCount = getFriendReqs().filter(r => r.toId === user.id).length;
-            const notifCount = getNotifs().filter(n => n.userId === user.id && !n.read).length;
+// Actions
+function login(email, pw) { const u=DB.users.find(x=>x.email===email&&x.password===pw); if(u){DB.session={userId:u.id};return true;} return false; }
+function register(data) { if(DB.users.find(x=>x.email===data.email)) return false; const users=DB.users; users.push({id:Date.now(),...data,avatar:'https://i.pravatar.cc/200?u='+Date.now(),cover:'https://picsum.photos/900/300?random='+Date.now(),joined:new Date().toISOString()}); DB.users=users; return true; }
+function logout() { DB.session=null; currentChatUser=null; render(); }
+function createPost(text, media, mediaType) { const p=DB.posts; p.unshift({id:Date.now(),userId:U().id,text,media,mediaType,reactions:{},comments:[],time:Date.now()}); DB.posts=p; }
+function deletePost(pid) { DB.posts=DB.posts.filter(p=>p.id!==pid); }
+function reactPost(pid, emoji) { const p=DB.posts; const post=p.find(x=>x.id===pid); if(post){post.reactions[U().id]=emoji; DB.posts=p;} }
+function addComment(pid, text) { const p=DB.posts; const post=p.find(x=>x.id===pid); if(post&&text.trim()){post.comments.push({userId:U().id,name:U().name,text:text.trim(),time:Date.now()}); DB.posts=p;} }
+function sendMsg(toId, text) { if(!text.trim()) return; const m=DB.messages; m.push({id:Date.now(),from:U().id,to:toId,text:text.trim(),time:Date.now()}); DB.messages=m; addNotif(toId, '💬 New message from '+U().name, 'msg'); }
+function getChatMsgs(otherId) { return DB.messages.filter(m=>(m.from===U().id&&m.to===otherId)||(m.from===otherId&&m.to===U().id)).sort((a,b)=>a.time-b.time); }
+function sendFriendReq(toId) { if(isFriend(toId)||U().id===toId) return; if(DB.friendReqs.some(r=>r.from===U().id&&r.to===toId)) return; DB.friendReqs=[...DB.friendReqs,{id:Date.now(),from:U().id,to:toId}]; addNotif(toId, U().name+' sent you a friend request 🤝', 'friend'); }
+function acceptReq(rid) { const r=DB.friendReqs.find(x=>x.id===rid); if(r&&r.to===U().id){DB.friends=[...DB.friends,{userId:r.from,friendId:r.to},{userId:r.to,friendId:r.from}]; DB.friendReqs=DB.friendReqs.filter(x=>x.id!==rid); addNotif(r.from, U().name+' accepted your friend request ✅', 'friend');} }
+function rejectReq(rid) { DB.friendReqs=DB.friendReqs.filter(x=>x.id!==rid); }
+function boostListing(lid) { const m=DB.market; const l=m.find(x=>x.id===lid); if(l){l.boosted=true;DB.market=m;alert('🚀 Listing boosted!');} }
+function createListing(title, price, loc, cat) { const m=DB.market; m.unshift({id:Date.now(),userId:U().id,title,price,location:loc,category:cat,image:'https://picsum.photos/seed/'+Date.now()+'/400/300',boosted:false,time:Date.now()}); DB.market=m; }
+function requestVerification() { if(isVerified(U().id)) return alert('Already verified!'); DB.verified=[...DB.verified,U().id]; alert('✅ You are now verified!'); }
+function startLive() { const t=prompt('Stream title:'); if(t){const l=DB.live;l.push({id:Date.now(),userId:U().id,title:t,thumbnail:U().avatar,viewers:Math.floor(Math.random()*50),time:Date.now()});DB.live=l;alert('🔴 LIVE now!');} }
+function updateProfile(data) { const u=DB.users; const cu=u.find(x=>x.id===U().id); if(data.name)cu.name=data.name; cu.bio=data.bio||''; cu.location=data.location||''; cu.marital=data.marital||''; cu.dob=data.dob||''; DB.users=u; }
+function updateAvatar(url) { const u=DB.users; u.find(x=>x.id===U().id).avatar=url; DB.users=u; }
+function updateCover(url) { const u=DB.users; u.find(x=>x.id===U().id).cover=url; DB.users=u; }
 
-            document.getElementById('app').innerHTML = `
-            <nav class="navbar">
-                <div class="logo" onclick="navTo('feed')"><span>W</span> WorldFG</div>
-                <div class="nav-tabs">
-                    <button class="nav-tab ${currentPage==='feed'?'active':''}" onclick="navTo('feed')">🏠 <span>Home</span></button>
-                    <button class="nav-tab ${currentPage==='live'?'active':''}" onclick="navTo('live')">🔴 <span>Live</span></button>
-                    <button class="nav-tab ${currentPage==='marketplace'?'active':''}" onclick="navTo('marketplace')">🛒 <span>Market</span></button>
-                    <button class="nav-tab ${currentPage==='messenger'?'active':''}" onclick="navTo('messenger')">💬 <span>Chat</span></button>
-                    <button class="nav-tab ${currentPage==='friends'?'active':''}" onclick="navTo('friends')">👥 <span>Friends</span></button>
-                    <button class="nav-tab ${currentPage==='notifications'?'active':''}" onclick="navTo('notifications')">🔔 <span>Alerts</span></button>
-                </div>
-                <div class="nav-actions">
-                    <button class="nav-btn" onclick="navTo('friends')" title="Friend Requests">👥${reqCount>0?`<span class="badge">${reqCount}</span>`:''}</button>
-                    <button class="nav-btn" onclick="navTo('notifications')" title="Notifications">🔔${notifCount>0?`<span class="badge">${notifCount}</span>`:''}</button>
-                    <img src="${user.profilePic}" class="avatar" onclick="navTo('profile')" title="My Profile">
-                    <button class="logout-btn" onclick="logout()">🚪 Logout</button>
-                </div>
-            </nav>
-            <div class="main-container">
-                <div id="feedPage" class="page ${currentPage==='feed'?'active':''}">${renderFeed()}</div>
-                <div id="livePage" class="page ${currentPage==='live'?'active':''}">${renderLive()}</div>
-                <div id="marketplacePage" class="page ${currentPage==='marketplace'?'active':''}">${renderMarket()}</div>
-                <div id="messengerPage" class="page ${currentPage==='messenger'?'active':''}">${renderMessenger()}</div>
-                <div id="friendsPage" class="page ${currentPage==='friends'?'active':''}">${renderFriends()}</div>
-                <div id="notificationsPage" class="page ${currentPage==='notifications'?'active':''}">${renderNotifs()}</div>
-                <div id="profilePage" class="page ${currentPage==='profile'?'active':''}">${renderProfile()}</div>
+// Emoji data
+const EMOJIS = ['😀','😂','🥰','😍','🤩','😘','😜','🤗','😎','🤔','😢','😡','👍','👎','👏','🙌','🔥','❤️','💯','🎉','💪','🙏','😇','🤝','🌟','✨','💩','👀','🎵','📸','💬','🏠','🛒','🔴','👥','🔔','✅','🚀','💻','🎮','🍕','✈️','🌴','🏖️','🧥','💍','🎂'];
+const REACTIONS = ['👍','❤️','😂','😮','😢','😡','🔥','👏'];
+
+function emojiBar(id) { return '<div class="emoji-bar">'+EMOJIS.map(e=>`<button onclick="insertEmoji('${id}','${e}')">${e}</button>`).join('')+'</div>'; }
+window.insertEmoji = function(id, emoji) { const el=document.getElementById(id); if(el){const s=el.selectionStart;el.value=el.value.slice(0,s)+emoji+el.value.slice(el.selectionEnd);el.focus();el.selectionStart=el.selectionEnd=s+emoji.length;} };
+
+// News data (simulated real news)
+function getNewsFeed() {
+    const news = [
+        { title: "Breaking: Global Tech Summit Announces New AI Regulations", source: "TechNews", time: "2h ago", image: "https://picsum.photos/seed/news1/400/200" },
+        { title: "Stock Markets Hit Record Highs Amid Economic Optimism", source: "Finance Daily", time: "3h ago", image: "https://picsum.photos/seed/news2/400/200" },
+        { title: "New Study Reveals Benefits of Remote Work for Mental Health", source: "Health Weekly", time: "4h ago", image: "https://picsum.photos/seed/news3/400/200" },
+        { title: "Champions League: Exciting Matches This Weekend", source: "Sports Center", time: "5h ago", image: "https://picsum.photos/seed/news4/400/200" },
+        { title: "Scientists Discover New Planet in Habitable Zone", source: "Space News", time: "6h ago", image: "https://picsum.photos/seed/news5/400/200" },
+        { title: "Latest Smartphone Features That Will Blow Your Mind", source: "Gadget Review", time: "7h ago", image: "https://picsum.photos/seed/news6/400/200" }
+    ];
+    return news;
+}
+
+// Trending topics
+function getTrending() {
+    return ["#WorldCup2026", "#TechTuesday", "#MotivationMonday", "#TravelGoals", "#FoodieLife", "#FitnessJourney", "#StartupLife", "#AIRevolution"];
+}
+
+// FUNNY VIDEOS (using placeholder URLs)
+function getFunnyVideos() {
+    return [
+        { title: "😂 When the code finally works!", views: "2.3M", thumbnail: "https://picsum.photos/seed/funny1/400/250" },
+        { title: "🤣 Best fails compilation of the week", views: "5.1M", thumbnail: "https://picsum.photos/seed/funny2/400/250" },
+        { title: "😆 Cat does the funniest thing ever", views: "8.7M", thumbnail: "https://picsum.photos/seed/funny3/400/250" }
+    ];
+}
+
+// ==================== RENDER ====================
+function render() {
+    const user = U();
+    if (!user) { renderAuth(); return; }
+    const reqCount = DB.friendReqs.filter(r=>r.to===user.id).length;
+    const notifCount = DB.notifs.filter(n=>n.userId===user.id&&!n.read).length;
+    
+    document.getElementById('app').innerHTML = `
+    <div class="topbar">
+        <div class="logo-area" onclick="navTo('feed')">
+            <div class="logo-icon">W</div>
+            <span class="logo-text">WorldFG</span>
+        </div>
+        <div class="search-box">
+            <i class="fas fa-search" style="color:#65676b;"></i>
+            <input type="text" placeholder="Search WorldFG..." id="globalSearch" onkeyup="searchGlobal()">
+        </div>
+        <div class="topbar-icons">
+            <button class="icon-btn" onclick="navTo('friends')" title="Friends">👥${reqCount>0?`<span class="badge-dot"></span>`:''}</button>
+            <button class="icon-btn" onclick="navTo('notifications')" title="Notifications">🔔${notifCount>0?`<span class="badge-dot"></span>`:''}</button>
+            <button class="icon-btn" onclick="navTo('messenger')" title="Messages">💬</button>
+            <img src="${user.avatar}" class="user-avatar" onclick="navTo('profile')" title="Profile">
+            <button onclick="logout()" style="background:#e41e3f;color:white;border:none;padding:6px 12px;border-radius:6px;cursor:pointer;font-weight:600;">Logout</button>
+        </div>
+    </div>
+    <div class="main-layout">
+        <div class="sidebar-left">
+            ${renderLeftSidebar(user)}
+        </div>
+        <div class="main-feed" id="mainContent">
+            ${renderPage()}
+        </div>
+        <div class="sidebar-right">
+            ${renderRightSidebar()}
+        </div>
+    </div>
+    <div id="searchResults" style="position:fixed;top:60px;left:50%;transform:translateX(-50%);width:400px;max-height:400px;overflow-y:auto;background:white;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,0.2);z-index:999;display:none;"></div>
+    `;
+    
+    attachEvents();
+    if (currentPage === 'messenger' && currentChatUser) scrollChat();
+}
+
+function renderLeftSidebar(user) {
+    return `
+    <div class="sidebar-card sidebar-profile">
+        <img src="${user.avatar}" onclick="navTo('profile')">
+        <h4>${esc(user.name)} ${isVerified(user.id)?'<span style="color:#1877f2;">✅</span>':''}</h4>
+        <p style="font-size:12px;color:#65676b;">${esc(user.bio?.slice(0,50)||'')}</p>
+        <div class="sidebar-stats">
+            <div><strong>${DB.posts.filter(p=>p.userId===user.id).length}</strong> Posts</div>
+            <div><strong>${getFriendsList().length}</strong> Friends</div>
+            <div><strong>${DB.market.filter(m=>m.userId===user.id).length}</strong> Listings</div>
+        </div>
+    </div>
+    <div class="sidebar-card">
+        <div class="section-title">📌 Shortcuts</div>
+        <div style="padding:6px 0;cursor:pointer;" onclick="navTo('feed')">🏠 News Feed</div>
+        <div style="padding:6px 0;cursor:pointer;" onclick="navTo('live')">🔴 Live Videos</div>
+        <div style="padding:6px 0;cursor:pointer;" onclick="navTo('marketplace')">🛒 Marketplace</div>
+        <div style="padding:6px 0;cursor:pointer;" onclick="navTo('messenger')">💬 Messenger</div>
+        <div style="padding:6px 0;cursor:pointer;" onclick="navTo('friends')">👥 Friends</div>
+        <div style="padding:6px 0;cursor:pointer;" onclick="navTo('profile')">👤 My Profile</div>
+    </div>`;
+}
+
+function renderRightSidebar() {
+    const news = getNewsFeed();
+    const trending = getTrending();
+    const videos = getFunnyVideos();
+    return `
+    <div class="sidebar-card">
+        <div class="section-title">🔥 Trending</div>
+        ${trending.map(t=>`<span class="trending-tag" style="cursor:pointer;">${t}</span>`).join(' ')}
+    </div>
+    <div class="sidebar-card">
+        <div class="section-title">📰 Latest News</div>
+        ${news.map(n=>`
+            <div class="news-item">
+                <img src="${n.image}" class="news-image" onerror="this.style.display='none'">
+                <div class="news-title">${esc(n.title)}</div>
+                <div class="news-source">${n.source} · ${n.time}</div>
             </div>
-          `;
-            attachEvents();
-        }
-
-        function navTo(page) { currentPage = page;
-            currentChatId = null;
-            render(); }
-        window.navTo = navTo;
-
-        function renderFeed() {
-            const user = currentUser();
-            const posts = getFeedPosts();
-            const mp = pendingMedia ? `
-            <div class="media-preview-wrap">
-                ${pendingMediaType==='image'?`<img src="${pendingMedia}">`:`<video src="${pendingMedia}" controls></video>`}
-                <button class="remove-media" onclick="clearPending()">✕</button>
-            </div>` : '';
-            return `
-            <div class="card composer">
-                <div class="composer-top">
-                    <img src="${user.profilePic}" class="avatar" onclick="navTo('profile')">
-                    <input class="composer-input" id="composerInput" placeholder="What's on your mind, ${esc(user.fullname)}? 😊" onclick="expandComposer()">
-                </div>
-                <div class="composer-expanded" id="composerExpanded">
-                    <textarea class="composer-textarea" id="composerText" placeholder="Share something..."></textarea>
-                    ${emojiBarHTML('composerText')}
-                    ${mp}
-                    <div class="composer-actions">
-                        <button class="composer-btn" onclick="triggerFileInput('image')">📷 Photo</button>
-                        <button class="composer-btn" onclick="triggerFileInput('video')">🎬 Video</button>
-                        <button class="submit-btn" onclick="submitPost()">📤 Post</button>
-                    </div>
-                </div>
-                <input type="file" id="postFileInput" accept="image/*,video/*" style="display:none;" onchange="handleFileSelect(event)">
+        `).join('')}
+    </div>
+    <div class="sidebar-card">
+        <div class="section-title">😂 Funny Videos</div>
+        ${videos.map(v=>`
+            <div class="news-item">
+                <img src="${v.thumbnail}" class="news-image">
+                <div class="news-title">${esc(v.title)}</div>
+                <div class="news-source">👁 ${v.views} views</div>
             </div>
-            <div id="feedPosts">
-                ${posts.length===0?`<div class="card card-body empty-state"><i>📭</i><p>No posts yet. Follow people or create your first post!</p></div>`:posts.map(p=>renderPostCard(p)).join('')}
-            </div>`;
-        }
+        `).join('')}
+    </div>`;
+}
 
-        function renderPostCard(post) {
-            const author = getUsers().find(u => u.id === post.userId);
-            if (!author) return '';
-            const uid = currentUser().id;
-            const myReaction = post.reactions[uid] || '';
-            const totalReactions = Object.keys(post.reactions).length;
-            const verified = isVerified(author.id);
-            return `
-            <div class="card post" id="post-${post.id}">
-                <div class="post-header">
-                    <img src="${author.profilePic}" class="avatar" onclick="viewUser(${author.id})">
-                    <div class="post-info">
-                        <div class="post-name" onclick="viewUser(${author.id})">${esc(author.fullname)} ${verified?'<span class="verified-icon">✅</span>':''}</div>
-                        <div class="post-time">${timeAgo(post.timestamp)}</div>
-                    </div>
-                    ${post.userId===uid?`<button class="post-delete" onclick="deleteMyPost(${post.id})">🗑️</button>`:''}
-                </div>
-                ${post.text?`<div class="post-text">${esc(post.text)}</div>`:''}
-                ${post.mediaUrl?`${post.mediaType==='image'?`<img src="${post.mediaUrl}" class="post-media" onclick="viewFull('${post.mediaUrl}','image')">`:`<video src="${post.mediaUrl}" class="post-media" controls></video>`}`:''}
-                <div class="post-stats">
-                    <span>${myReaction||'👍'} ${totalReactions} reactions</span>
-                    <span>💬 ${post.comments.length} comments</span>
-                </div>
-                <div class="post-buttons">
-                    <div style="position:relative;flex:1;display:flex;">
-                        <button class="post-btn reaction-btn" data-pid="${post.id}">${myReaction||'👍'} React</button>
-                        <div class="reaction-emojis" style="display:none;position:absolute;top:-45px;left:0;background:white;border-radius:20px;padding:4px 8px;box-shadow:0 2px 8px rgba(0,0,0,0.2);z-index:10;" id="reactions-${post.id}">
-                            ${REACTIONS.map(r=>`<button onclick="reactToPost(${post.id},'${r}')">${r}</button>`).join('')}
-                        </div>
-                    </div>
-                    <button class="post-btn" onclick="toggleComments(${post.id})">💬 Comment</button>
-                </div>
-                <div class="comments-section" id="comments-${post.id}">
-                    ${post.comments.map(c=>`
-                        <div class="comment">
-                            <img src="${(getUsers().find(u=>u.id===c.userId)||{}).profilePic||'https://ui-avatars.com/api/?name=U&size=32'}" class="comment-avatar">
-                            <div class="comment-body">
-                                <div class="comment-name">${esc(c.username)}</div>
-                                <div class="comment-text">${esc(c.text)}</div>
-                                <div class="comment-time">${timeAgo(c.timestamp)}</div>
-                            </div>
-                        </div>
-                    `).join('')}
-                    <div class="comment-form">
-                        <input class="comment-input" id="commentInput-${post.id}" placeholder="Write a comment... 💬" onkeypress="if(event.key==='Enter')submitComment(${post.id})">
-                        <button class="comment-submit" onclick="submitComment(${post.id})">Send</button>
-                    </div>
-                    ${emojiBarHTML('commentInput-'+post.id)}
-                </div>
-            </div>`;
-        }
+function renderPage() {
+    switch(currentPage) {
+        case 'feed': return renderFeed();
+        case 'live': return renderLive();
+        case 'marketplace': return renderMarketplace();
+        case 'messenger': return renderMessenger();
+        case 'friends': return renderFriends();
+        case 'notifications': return renderNotifications();
+        case 'profile': return renderProfile();
+        default: return renderFeed();
+    }
+}
 
-        function renderLive() {
-            const ls = getLivestreams();
-            return `
-            <div class="card card-body">
-                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
-                    <h2>🔴 Live Streaming</h2>
-                    <button class="btn btn-danger" onclick="startLiveStream()">🎥 Go Live</button>
-                </div>
-                <div class="live-grid">
-                    ${ls.length===0?`<div class="empty-state"><i>📡</i><p>No live streams. Be the first!</p></div>`:ls.map(l=>{
-                        const streamer=getUsers().find(u=>u.id===l.userId);
-                        return `<div class="live-card" onclick="joinLive(${l.id})">
-                            <img src="${l.thumbnail||'https://picsum.photos/400/250'}">
-                            <div class="live-badge">🔴 LIVE</div>
-                            <div class="live-viewers">👁 ${l.viewers}</div>
-                            <div class="live-title">${esc(streamer?.fullname||'User')} - ${esc(l.title)}</div>
-                        </div>`;
-                    }).join('')}
-                </div>
-            </div>`;
-        }
-
-        function renderMarket() {
-            const items = getMarketplace().sort((a, b) => (b.boosted ? 1 : 0) - (a.boosted ? 1 : 0) || b.timestamp - a.timestamp);
-            return `
-            <div class="card card-body" style="margin-bottom:16px;">
-                <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <h2>🛒 Marketplace</h2>
-                    <button class="btn btn-success" onclick="openCreateListing()">➕ Create Listing</button>
-                </div>
-                <p style="color:var(--text2);margin-top:4px;">Buy, sell, and discover items 🏷️</p>
+function renderFeed() {
+    const user = U();
+    const posts = DB.posts.filter(p=>{
+        const friends = getFriendsList();
+        return p.userId===user.id || friends.includes(p.userId);
+    }).sort((a,b)=>b.time-a.time);
+    
+    const mediaPreview = pendingMedia ? `
+    <div class="media-preview-wrap">
+        ${pendingMediaType==='image'?`<img src="${pendingMedia}">`:`<video src="${pendingMedia}" controls></video>`}
+        <button class="remove-media-btn" onclick="clearPendingMedia()">✕</button>
+    </div>` : '';
+    
+    return `
+    <div class="card create-post card-pad">
+        <div class="post-input-row">
+            <img src="${user.avatar}" class="post-avatar" onclick="navTo('profile')">
+            <textarea class="post-textarea ${expandedComposer?'expanded':''}" id="postText" placeholder="What's on your mind, ${esc(user.name)}? 😊" onfocus="expandComposer()" rows="${expandedComposer?'3':'1'}"></textarea>
+        </div>
+        ${expandedComposer ? `
+            ${emojiBar('postText')}
+            ${mediaPreview}
+            <div class="post-actions-row">
+                <button class="post-action-btn" onclick="triggerMedia('image')">📷 Photo</button>
+                <button class="post-action-btn" onclick="triggerMedia('video')">🎬 Video</button>
+                <button class="post-action-btn" onclick="navTo('live')">🔴 Live</button>
+                <button class="submit-post-btn" onclick="submitPost()">Post</button>
             </div>
-            <div class="card">
-                <div class="market-grid">
-                    ${items.length===0?`<div class="empty-state"><i>🏪</i><p>No listings yet.</p></div>`:items.map(l=>{
-                        const seller=getUsers().find(u=>u.id===l.userId);
-                        return `<div class="market-item">
-                            <img src="${l.mediaUrl||'https://picsum.photos/400/300'}" onclick="viewFull('${l.mediaUrl}','image')">
-                            <div class="info">
-                                <div class="market-price">💰 $${esc(l.price)}</div>
-                                <div class="market-title">${esc(l.text)}</div>
-                                <div class="market-location">📍 ${esc(l.location||'Unknown')}</div>
-                                ${l.boosted?'<span class="boost-badge">🚀 Boosted</span>':''}
-                                <div style="margin-top:6px;display:flex;gap:4px;">
-                                    <button class="btn btn-primary" style="font-size:0.7rem;padding:4px 8px;" onclick="contactSeller(${l.userId})">💬 Chat</button>
-                                    ${!l.boosted?`<button class="btn btn-outline" style="font-size:0.7rem;padding:4px 8px;" onclick="boostListing(${l.id});render();">🚀 Boost</button>`:''}
-                                </div>
-                            </div>
-                        </div>`;
-                    }).join('')}
-                </div>
-            </div>`;
-        }
+        ` : ''}
+        <input type="file" id="mediaInput" accept="image/*,video/*" style="display:none;" onchange="handleMedia(event)">
+    </div>
+    <div id="feedPosts">
+        ${posts.length===0?`<div class="card card-pad empty-state"><i>📭</i><p>No posts yet. Connect with friends!</p></div>`:posts.map(p=>renderPostCard(p)).join('')}
+    </div>`;
+}
 
-        function renderMessenger() {
-            const user = currentUser();
-            const friends = getFriends(user.id);
-            const friendUsers = getUsers().filter(u => friends.includes(u.id));
-            const chatUser = currentChatId ? getUsers().find(u => u.id === currentChatId) : null;
-            const msgs = currentChatId ? getChatMsgs(currentChatId) : [];
-            return `
-            <div class="messenger-layout">
-                <div class="chat-sidebar">
-                    <div class="chat-search"><input type="text" placeholder="🔍 Search chats..." id="chatSearch" oninput="filterChats()"></div>
-                    <div class="chat-list">
-                        ${friendUsers.length===0?`<div class="empty-state"><p>No friends to chat with</p></div>`:friendUsers.map(f=>`
-                            <div class="chat-user ${currentChatId===f.id?'active':''}" onclick="openChat(${f.id})">
-                                <img src="${f.profilePic}" class="avatar">
-                                <div class="name">${esc(f.fullname)}</div>
-                            </div>
-                        `).join('')}
+function renderPostCard(post) {
+    const author = getUser(post.userId);
+    if (!author) return '';
+    const myReaction = post.reactions[U().id] || '';
+    const totalReactions = Object.keys(post.reactions).length;
+    return `
+    <div class="card post-card" id="post-${post.id}">
+        <div class="post-top">
+            <img src="${author.avatar}" class="post-avatar" onclick="viewUser(${author.id})">
+            <div class="post-info">
+                <div class="post-author" onclick="viewUser(${author.id})">${esc(author.name)} ${isVerified(author.id)?'<span class="verified-badge">✅</span>':''}</div>
+                <div class="post-meta">${timeAgo(post.time)} · 📍 ${esc(author.location||'Unknown')}</div>
+            </div>
+            ${post.userId===U().id?`<button class="post-delete-btn" onclick="deleteMyPost(${post.id})">🗑️</button>`:''}
+        </div>
+        ${post.text?`<div class="post-body"><div class="post-text-content">${esc(post.text)}</div></div>`:''}
+        ${post.media?`${post.mediaType==='image'?`<img src="${post.media}" class="post-media-content" onclick="viewFull('${post.media}','image')">`:`<video src="${post.media}" class="post-media-content" controls></video>`}`:''}
+        <div class="post-stats-bar">
+            <span>${myReaction||'👍'} ${totalReactions} reactions</span>
+            <span>💬 ${post.comments.length} comments</span>
+        </div>
+        <div class="post-buttons-bar">
+            <div class="reaction-btn-wrap">
+                <button class="post-btn" onmouseenter="showReactions(${post.id})">${myReaction||'👍'} React</button>
+                <div class="reactions-popup" id="reactions-${post.id}" onmouseleave="hideReactions(${post.id})">
+                    ${REACTIONS.map(r=>`<button onclick="doReact(${post.id},'${r}')">${r}</button>`).join('')}
+                </div>
+            </div>
+            <button class="post-btn" onclick="toggleComments(${post.id})">💬 Comment</button>
+            <button class="post-btn" onclick="sharePost(${post.id})">🔄 Share</button>
+        </div>
+        <div class="comments-panel" id="comments-${post.id}">
+            ${post.comments.map(c=>`
+                <div class="comment-item">
+                    <img src="${(getUser(c.userId)||{}).avatar||'https://i.pravatar.cc/32?u=default'}" class="comment-avatar">
+                    <div class="comment-bubble">
+                        <div class="comment-author">${esc(c.name)}</div>
+                        <div class="comment-text">${esc(c.text)}</div>
+                        <div class="comment-time">${timeAgo(c.time)}</div>
                     </div>
                 </div>
-                <div class="chat-main">
-                    ${chatUser?`
-                        <div class="chat-header"><img src="${chatUser.profilePic}" class="avatar"> ${esc(chatUser.fullname)}</div>
-                        <div class="chat-messages" id="chatMsgs">
-                            ${msgs.length===0?`<div class="empty-state"><p>Say hello! 👋</p></div>`:msgs.map(m=>`
-                                <div class="msg ${m.fromId===user.id?'sent':'received'}">
-                                    ${esc(m.text)}
-                                    <div class="time">${timeAgo(m.timestamp)}</div>
-                                </div>
-                            `).join('')}
-                        </div>
-                        <div class="chat-input-area">
-                            <input type="text" id="msgInput" placeholder="Type a message... 😊" onkeypress="if(event.key==='Enter')sendChatMsg()">
-                            ${emojiBarHTML('msgInput')}
-                            <button onclick="sendChatMsg()">➤</button>
-                        </div>
-                    `:`<div class="empty-state" style="flex:1;display:flex;align-items:center;justify-content:center;"><i>💬</i><p>Select a conversation</p></div>`}
-                </div>
-            </div>`;
-        }
-
-        function renderFriends() {
-            const user = currentUser();
-            const all = getUsers().filter(u => u.id !== user.id);
-            const friends = getFriends(user.id);
-            const pending = getFriendReqs().filter(r => r.toId === user.id);
-            return `
-            <div class="card card-body" style="margin-bottom:16px;">
-                <h3>📨 Friend Requests (${pending.length})</h3>
-                ${pending.length===0?`<p style="color:var(--text2);">No pending requests</p>`:pending.map(r=>{
-                    const from=getUsers().find(u=>u.id===r.fromId);
-                    return from?`<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);">
-                        <img src="${from.profilePic}" class="avatar">
-                        <span style="flex:1;font-weight:600;">${esc(from.fullname)}</span>
-                        <button class="btn btn-primary" style="font-size:0.75rem;" onclick="acceptReq(${r.id});render();">✅ Accept</button>
-                        <button class="btn btn-outline" style="font-size:0.75rem;" onclick="rejectReq(${r.id});render();">❌</button>
-                    </div>`:'';
-                }).join('')}
+            `).join('')}
+            <div class="comment-form">
+                <input class="comment-input" id="commentInput-${post.id}" placeholder="Write a comment... 💬" onkeypress="if(event.key==='Enter')submitComment(${post.id})">
+                <button class="comment-send" onclick="submitComment(${post.id})">Send</button>
             </div>
-            <div class="card card-body">
-                <h3>👥 Discover People</h3>
-                <input type="text" class="composer-input" id="friendSearch" placeholder="🔍 Search..." style="margin-bottom:12px;" oninput="filterFriends()">
-                <div class="friends-grid" id="friendsGrid">
-                    ${all.map(u=>`
-                        <div class="friend-card" data-name="${esc(u.fullname).toLowerCase()}">
-                            <img src="${u.profilePic}" onclick="viewUser(${u.id})">
-                            <h4>${esc(u.fullname)} ${isVerified(u.id)?'✅':''}</h4>
-                            <p style="font-size:0.8rem;color:var(--text2);">${esc(u.bio?.slice(0,30)||'')}</p>
-                            <div style="margin-top:6px;display:flex;gap:4px;flex-wrap:wrap;justify-content:center;">
-                                ${friends.includes(u.id)?'<button class="btn btn-outline" disabled>✓ Friends</button>':`<button class="btn btn-primary" style="font-size:0.7rem;" onclick="sendFriendReq(${u.id});this.innerText='Sent';this.disabled=true;">🤝 Add</button>`}
-                                <button class="btn btn-outline" style="font-size:0.7rem;" onclick="${isFollowing(user.id,u.id)?`unfollowUser(${u.id})`:`followUser(${u.id})`};render();">${isFollowing(user.id,u.id)?'Unfollow':'Follow'}</button>
-                                <button class="btn btn-outline" style="font-size:0.7rem;" onclick="openChat(${u.id})">💬</button>
-                            </div>
-                        </div>
-                    `).join('')}
-                </div>
-            </div>`;
-        }
+            ${emojiBar('commentInput-'+post.id)}
+        </div>
+    </div>`;
+}
 
-        function renderNotifs() {
-            const notifs = getNotifs().filter(n => n.userId === currentUser().id);
-            const allNotifs = getNotifs().map(n => n.userId === currentUser().id ? { ...n, read: true } : n);
-            setNotifs(allNotifs);
-            return `
-            <div class="card">
-                <div style="padding:16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;">
-                    <h3>🔔 Notifications</h3>
-                    <button class="btn btn-outline" onclick="clearNotifs()">Clear All</button>
-                </div>
-                ${notifs.length===0?`<div class="empty-state"><i>🔕</i><p>No notifications</p></div>`:notifs.map(n=>`
-                    <div class="notif-item">
-                        <div class="notif-icon ${n.type}">
-                            ${n.type==='like'||n.type==='follow'?'👍':n.type==='comment'?'💬':n.type==='friend_request'||n.type==='friend_accept'?'🤝':n.type==='message'?'💬':'🔔'}
+function renderLive() {
+    const streams = DB.live;
+    return `
+    <div class="card card-pad">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+            <div class="section-title">🔴 Live Now</div>
+            <button class="btn btn-danger" onclick="startLiveStream()" style="background:#e41e3f;color:white;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-weight:600;">🎥 Go Live</button>
+        </div>
+        <div class="live-grid">
+            ${streams.length===0?`<div class="empty-state"><i>📡</i><p>No live streams. Be the first!</p></div>`:streams.map(s=>{
+                const streamer = getUser(s.userId);
+                return `<div class="live-card" onclick="joinLive(${s.id})">
+                    <img src="${s.thumbnail||streamer?.avatar||''}" onerror="this.src='https://picsum.photos/400/250'">
+                    <div class="live-indicator">🔴 LIVE</div>
+                    <div class="live-viewers">👁 ${s.viewers} watching</div>
+                    <div class="live-name">${esc(streamer?.name||'User')} - ${esc(s.title)}</div>
+                </div>`;
+            }).join('')}
+        </div>
+    </div>`;
+}
+
+function renderMarketplace() {
+    const items = DB.market.sort((a,b)=>(b.boosted?1:0)-(a.boosted?1:0)||b.time-a.time);
+    return `
+    <div class="card card-pad" style="margin-bottom:16px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div class="section-title">🛒 Marketplace</div>
+            <button class="btn btn-success" onclick="createMarketListing()" style="background:#42b72a;color:white;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-weight:600;">➕ Sell Item</button>
+        </div>
+    </div>
+    <div class="card">
+        <div class="market-grid">
+            ${items.length===0?`<div class="empty-state"><i>🏪</i><p>No listings yet.</p></div>`:items.map(m=>{
+                const seller = getUser(m.userId);
+                return `<div class="market-item">
+                    <img src="${m.image}" onerror="this.src='https://picsum.photos/400/300'">
+                    <div class="market-item-body">
+                        <div class="market-price">💰 $${esc(m.price)}</div>
+                        <div class="market-title">${esc(m.title)}</div>
+                        <div class="market-loc">📍 ${esc(m.location)} · Seller: ${esc(seller?.name||'Unknown')}</div>
+                        ${m.boosted?'<span class="boost-tag">🚀 BOOSTED</span>':''}
+                        <div style="margin-top:6px;display:flex;gap:4px;">
+                            <button class="btn" style="background:#1877f2;color:white;border:none;padding:4px 10px;border-radius:4px;cursor:pointer;font-size:11px;" onclick="contactSeller(${m.userId})">💬 Chat Seller</button>
+                            ${!m.boosted?`<button class="btn" style="background:#e4e6eb;color:black;border:none;padding:4px 10px;border-radius:4px;cursor:pointer;font-size:11px;" onclick="boostItem(${m.id})">🚀 Boost</button>`:''}
                         </div>
-                        <div class="notif-text">${esc(n.message)}</div>
-                        <div class="notif-time">${n.time}</div>
+                    </div>
+                </div>`;
+            }).join('')}
+        </div>
+    </div>`;
+}
+
+function renderMessenger() {
+    const friends = getFriendsList();
+    const friendUsers = DB.users.filter(u=>friends.includes(u.id)&&u.id!==U().id);
+    const chatUser = currentChatUser ? getUser(currentChatUser) : null;
+    const msgs = currentChatUser ? getChatMsgs(currentChatUser) : [];
+    return `
+    <div class="chat-container">
+        <div class="chat-sidebar">
+            <div class="chat-search"><input type="text" placeholder="🔍 Search chats..." id="chatSearch" oninput="filterChats()"></div>
+            <div class="chat-list">
+                ${friendUsers.length===0?`<div class="empty-state"><p>No friends yet</p></div>`:friendUsers.map(f=>`
+                    <div class="chat-user ${currentChatUser===f.id?'active':''}" onclick="openChat(${f.id})">
+                        <img src="${f.avatar}">
+                        <span class="chat-user-name">${esc(f.name)}</span>
                     </div>
                 `).join('')}
-            </div>`;
+            </div>
+        </div>
+        <div class="chat-main">
+            ${chatUser?`
+                <div class="chat-header-bar">
+                    <img src="${chatUser.avatar}" style="width:36px;height:36px;border-radius:50%;object-fit:cover;">
+                    <span>${esc(chatUser.name)} ${isVerified(chatUser.id)?'✅':''}</span>
+                </div>
+                <div class="chat-msgs" id="chatMsgs">
+                    ${msgs.length===0?`<div class="empty-state"><p>Say hello! 👋</p></div>`:msgs.map(m=>`
+                        <div class="msg-bubble ${m.from===U().id?'msg-sent':'msg-received'}">
+                            ${esc(m.text)}
+                            <div class="msg-time">${timeAgo(m.time)}</div>
+                        </div>
+                    `).join('')}
+                </div>
+                <div class="chat-input-bar">
+                    <input type="text" id="msgInput" placeholder="Type a message... 😊" onkeypress="if(event.key==='Enter')sendChatMessage()">
+                    <button class="chat-send-btn" onclick="sendChatMessage()">➤</button>
+                </div>
+                ${emojiBar('msgInput')}
+            `:`<div class="empty-state" style="flex:1;display:flex;align-items:center;justify-content:center;"><i>💬</i><h3>Select a conversation</h3></div>`}
+        </div>
+    </div>`;
+}
+
+function renderFriends() {
+    const allUsers = DB.users.filter(u=>u.id!==U().id);
+    const friends = getFriendsList();
+    const pending = DB.friendReqs.filter(r=>r.to===U().id);
+    return `
+    <div class="card card-pad" style="margin-bottom:16px;">
+        <div class="section-title">📨 Friend Requests (${pending.length})</div>
+        ${pending.length===0?`<p style="color:#65676b;">No pending requests</p>`:pending.map(r=>{
+            const from = getUser(r.from);
+            return from?`<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #e4e6eb;">
+                <img src="${from.avatar}" style="width:40px;height:40px;border-radius:50%;object-fit:cover;">
+                <span style="flex:1;font-weight:600;">${esc(from.name)}</span>
+                <button class="btn" style="background:#1877f2;color:white;border:none;padding:6px 12px;border-radius:4px;cursor:pointer;font-size:12px;" onclick="acceptFriendReq(${r.id})">✅ Accept</button>
+                <button class="btn" style="background:#e4e6eb;color:black;border:none;padding:6px 12px;border-radius:4px;cursor:pointer;font-size:12px;" onclick="rejectFriendReq(${r.id})">❌</button>
+            </div>`:'';
+        }).join('')}
+    </div>
+    <div class="card card-pad">
+        <div class="section-title">👥 Discover People</div>
+        <input type="text" placeholder="🔍 Search by name or location..." style="width:100%;padding:10px;border:1px solid #e4e6eb;border-radius:20px;margin-bottom:12px;font-size:14px;outline:none;" id="friendSearch" oninput="filterFriendSearch()">
+        <div class="friends-grid" id="friendsGrid">
+            ${allUsers.map(u=>`
+                <div class="friend-card" data-search="${esc(u.name).toLowerCase()} ${esc(u.location||'').toLowerCase()}">
+                    <img src="${u.avatar}" onclick="viewUser(${u.id})">
+                    <h4>${esc(u.name)} ${isVerified(u.id)?'✅':''}</h4>
+                    <p style="font-size:11px;color:#65676b;">📍 ${esc(u.location||'Unknown')}</p>
+                    <div style="margin-top:6px;display:flex;gap:4px;flex-wrap:wrap;justify-content:center;">
+                        ${friends.includes(u.id)?`<button class="btn" style="background:#e4e6eb;border:none;padding:4px 8px;border-radius:4px;font-size:11px;" disabled>✓ Friends</button>`:`<button class="btn" style="background:#1877f2;color:white;border:none;padding:4px 8px;border-radius:4px;cursor:pointer;font-size:11px;" onclick="addFriend(${u.id});this.innerText='Sent';this.disabled=true;">🤝 Add</button>`}
+                        <button class="btn" style="background:#e4e6eb;border:none;padding:4px 8px;border-radius:4px;cursor:pointer;font-size:11px;" onclick="openChat(${u.id})">💬 Chat</button>
+                    </div>
+                </div>
+            `).join('')}
+        </div>
+    </div>`;
+}
+
+function renderNotifications() {
+    const notifs = DB.notifs.filter(n=>n.userId===U().id);
+    // Mark as read
+    DB.notifs = DB.notifs.map(n=>n.userId===U().id?{...n,read:true}:n);
+    return `
+    <div class="card">
+        <div style="padding:16px;border-bottom:1px solid #e4e6eb;display:flex;justify-content:space-between;">
+            <div class="section-title">🔔 Notifications</div>
+            <button class="btn" style="background:#e4e6eb;border:none;padding:6px 12px;border-radius:4px;cursor:pointer;font-size:12px;" onclick="clearAllNotifs()">Clear All</button>
+        </div>
+        ${notifs.length===0?`<div class="empty-state"><i>🔕</i><p>No notifications</p></div>`:notifs.map(n=>`
+            <div class="notif-item">
+                <div class="notif-icon-circle ${n.type}">${n.type==='like'?'❤️':n.type==='comment'?'💬':n.type==='friend'?'🤝':n.type==='msg'?'💬':'🔔'}</div>
+                <div style="flex:1;">
+                    <div style="font-size:14px;">${esc(n.message)}</div>
+                    <div style="font-size:11px;color:#65676b;">${n.time}</div>
+                </div>
+            </div>
+        `).join('')}
+    </div>`;
+}
+
+function renderProfile() {
+    const user = U();
+    const myPosts = DB.posts.filter(p=>p.userId===user.id).sort((a,b)=>b.time-a.time);
+    return `
+    <div class="card" style="margin-bottom:16px;">
+        <div style="height:250px;background-image:url('${user.cover||'https://picsum.photos/900/300'}');background-size:cover;background-position:center;border-radius:12px 12px 0 0;position:relative;cursor:pointer;" onclick="changeCoverPhoto()">
+            <button style="position:absolute;bottom:12px;right:12px;background:rgba(0,0,0,0.6);color:white;border:none;padding:6px 12px;border-radius:6px;cursor:pointer;font-size:12px;" onclick="event.stopPropagation();changeCoverPhoto()">📷 Edit Cover</button>
+        </div>
+        <div style="padding:0 20px 20px;position:relative;margin-top:-60px;">
+            <div style="position:relative;display:inline-block;">
+                <img src="${user.avatar}" style="width:120px;height:120px;border-radius:50%;object-fit:cover;border:4px solid white;cursor:pointer;" onclick="viewFull('${user.avatar}','image')">
+                <button style="position:absolute;bottom:8px;right:8px;background:#f0f2f5;border:none;border-radius:50%;width:32px;height:32px;cursor:pointer;" onclick="changeAvatar()">📷</button>
+            </div>
+            <h2 style="margin-top:8px;">${esc(user.name)} ${isVerified(user.id)?'<span style="color:#1877f2;">✅ Verified</span>':''}</h2>
+            <p style="color:#65676b;">${esc(user.bio||'No bio yet')}</p>
+            <div style="display:flex;gap:20px;margin-top:8px;font-size:13px;color:#65676b;">
+                <div><strong style="color:#1c1e21;">${myPosts.length}</strong> Posts</div>
+                <div><strong style="color:#1c1e21;">${getFriendsList().length}</strong> Friends</div>
+                <div>📍 ${esc(user.location||'Not set')}</div>
+            </div>
+            <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;">
+                <button class="btn" style="background:#1877f2;color:white;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-weight:600;" onclick="editProfile()">✏️ Edit Profile</button>
+                ${!isVerified(user.id)?`<button class="btn" style="background:#1877f2;color:white;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-weight:600;" onclick="requestVerification()">🔵 Get Verified</button>`:''}
+            </div>
+        </div>
+    </div>
+    <div class="card card-pad">
+        <div class="section-title">📝 My Posts</div>
+        ${myPosts.length===0?`<div class="empty-state"><p>No posts yet.</p></div>`:myPosts.map(p=>renderPostCard(p)).join('')}
+    </div>`;
+}
+
+function renderAuth() {
+    document.getElementById('app').innerHTML = `
+    <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);padding:20px;">
+        <div style="background:white;border-radius:16px;padding:40px;max-width:430px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+            <div style="text-align:center;margin-bottom:24px;">
+                <div style="width:60px;height:60px;background:#1877f2;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:white;font-size:28px;font-weight:800;">W</div>
+                <h1 style="margin-top:12px;color:#1877f2;">WorldFG</h1>
+                <p style="color:#65676b;">Connect with friends and the world 🌍</p>
+            </div>
+            <div style="display:flex;gap:8px;margin-bottom:16px;">
+                <button id="showLoginTab" class="btn" style="flex:1;background:#1877f2;color:white;border:none;padding:10px;border-radius:6px;cursor:pointer;font-weight:600;">Login</button>
+                <button id="showRegTab" class="btn" style="flex:1;background:#e4e6eb;color:black;border:none;padding:10px;border-radius:6px;cursor:pointer;font-weight:600;">Sign Up</button>
+            </div>
+            <div id="authForm"></div>
+            <div id="authMsg" style="text-align:center;margin-top:10px;font-size:13px;"></div>
+        </div>
+    </div>`;
+    
+    function showLogin() {
+        document.getElementById('showLoginTab').style.background='#1877f2'; document.getElementById('showLoginTab').style.color='white';
+        document.getElementById('showRegTab').style.background='#e4e6eb'; document.getElementById('showRegTab').style.color='black';
+        document.getElementById('authForm').innerHTML = `
+            <input id="loginEmail" placeholder="Email address" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:8px;font-size:14px;margin-bottom:10px;">
+            <input id="loginPass" type="password" placeholder="Password" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:8px;font-size:14px;margin-bottom:15px;">
+            <button onclick="doLogin()" style="width:100%;padding:12px;background:#1877f2;color:white;border:none;border-radius:8px;font-size:16px;font-weight:600;cursor:pointer;">🔓 Log In</button>
+            <p style="text-align:center;margin-top:12px;font-size:12px;color:#65676b;">Demo: test@test.com / 123456</p>
+        `;
+    }
+    
+    function showRegister() {
+        document.getElementById('showRegTab').style.background='#1877f2'; document.getElementById('showRegTab').style.color='white';
+        document.getElementById('showLoginTab').style.background='#e4e6eb'; document.getElementById('showLoginTab').style.color='black';
+        document.getElementById('authForm').innerHTML = `
+            <input id="regName" placeholder="Full Name" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:8px;font-size:14px;margin-bottom:8px;">
+            <input id="regEmail" placeholder="Email address" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:8px;font-size:14px;margin-bottom:8px;">
+            <input id="regPass" type="password" placeholder="Password (6+ characters)" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:8px;font-size:14px;margin-bottom:8px;">
+            <input id="regLoc" placeholder="Location (city)" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:8px;font-size:14px;margin-bottom:15px;">
+            <button onclick="doRegister()" style="width:100%;padding:12px;background:#42b72a;color:white;border:none;border-radius:8px;font-size:16px;font-weight:600;cursor:pointer;">✨ Create Account</button>
+        `;
+    }
+    
+    document.getElementById('showLoginTab').onclick = showLogin;
+    document.getElementById('showRegTab').onclick = showRegister;
+    showLogin();
+    
+    window.doLogin = function() {
+        if(login(document.getElementById('loginEmail').value, document.getElementById('loginPass').value)) {
+            render();
+        } else {
+            document.getElementById('authMsg').innerHTML = '<span style="color:#e41e3f;">❌ Invalid email or password</span>';
         }
-
-        function renderProfile() {
-            const user = currentUser();
-            const myPosts = getPosts().filter(p => p.userId === user.id).sort((a, b) => b.timestamp - a.timestamp);
-            const verified = isVerified(user.id);
-            return `
-            <div class="card" style="margin-bottom:16px;">
-                <div class="profile-cover" style="background-image:url('${user.coverPic}');" onclick="changeCover()">
-                    <button onclick="event.stopPropagation();changeCover();">📷 Edit Cover</button>
-                </div>
-                <div class="profile-info">
-                    <div class="profile-pic-wrap">
-                        <img src="${user.profilePic}" class="avatar-lg" onclick="viewFull('${user.profilePic}','image')">
-                        <button onclick="changeProfilePic()">📷</button>
-                    </div>
-                    <div class="profile-name">${esc(user.fullname)} ${verified?'✅':''}</div>
-                    <div class="profile-bio">${esc(user.bio||'No bio yet.')}</div>
-                    <div class="profile-stats">
-                        <div><b>${myPosts.length}</b> Posts</div>
-                        <div><b>${user.followers?.length||0}</b> Followers</div>
-                        <div><b>${user.following?.length||0}</b> Following</div>
-                        <div><b>${getFriends(user.id).length}</b> Friends</div>
-                    </div>
-                    <div class="profile-actions">
-                        <button class="btn btn-primary" onclick="openEditProfile()">✏️ Edit Profile</button>
-                        <button class="btn btn-outline" onclick="openSettings()">⚙️ Settings</button>
-                        ${!verified?`<button class="btn btn-primary" onclick="requestVerification();render();">🔵 Get Verified</button>`:`<span style="color:var(--primary);font-weight:600;">✅ Verified Account</span>`}
-                    </div>
-                </div>
-                <div class="profile-tabs">
-                    <button class="profile-tab active" onclick="switchProfileTab('posts')">📝 Posts</button>
-                    <button class="profile-tab" onclick="switchProfileTab('media')">📸 Media (${user.media.length})</button>
-                    <button class="profile-tab" onclick="switchProfileTab('about')">ℹ️ About</button>
-                </div>
-                <div id="profilePosts" class="card-body">${myPosts.length===0?`<div class="empty-state"><p>No posts yet.</p></div>`:myPosts.map(p=>renderPostCard(p)).join('')}</div>
-                <div id="profileMedia" class="card-body" style="display:none;">
-                    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;">
-                        ${user.media.map((m,i)=>`<div style="position:relative;cursor:pointer;" onclick="viewFull('${m.url}','${m.type}')">
-                            ${m.type==='image'?`<img src="${m.url}" style="width:100%;height:140px;object-fit:cover;border-radius:8px;">`:`<video src="${m.url}" style="width:100%;height:140px;object-fit:cover;border-radius:8px;"></video>`}
-                            <button class="remove-media" onclick="event.stopPropagation();deleteMedia(${i});render();">✕</button>
-                        </div>`).join('')}
-                    </div>
-                    <button class="btn btn-primary" style="margin-top:10px;" onclick="uploadNewMedia()">➕ Upload</button>
-                </div>
-                <div id="profileAbout" class="card-body" style="display:none;">
-                    <p>📍 <b>Location:</b> ${esc(user.address||'Not set')}</p>
-                    <p>💍 <b>Status:</b> ${esc(user.marital||'Not set')}</p>
-                    <p>🎂 <b>Birthday:</b> ${esc(user.dob||'Not set')}</p>
-                    <p>📧 <b>Email:</b> ${esc(user.email)}</p>
-                    <p>📅 <b>Joined:</b> ${new Date(user.createdAt).toLocaleDateString()}</p>
-                </div>
-            </div>`;
+    };
+    
+    window.doRegister = function() {
+        const name = document.getElementById('regName').value;
+        const email = document.getElementById('regEmail').value;
+        const pw = document.getElementById('regPass').value;
+        const loc = document.getElementById('regLoc').value;
+        if(!name||!email||!pw) { document.getElementById('authMsg').innerHTML='<span style="color:#e41e3f;">❌ Name, email, and password required</span>'; return; }
+        if(pw.length<6) { document.getElementById('authMsg').innerHTML='<span style="color:#e41e3f;">❌ Password must be 6+ characters</span>'; return; }
+        if(register({name,email,password:pw,bio:'',location:loc||'Unknown',marital:'',dob:''})) {
+            document.getElementById('authMsg').innerHTML='<span style="color:#42b72a;">✅ Account created! Please login.</span>';
+            setTimeout(showLogin, 1500);
+        } else {
+            document.getElementById('authMsg').innerHTML='<span style="color:#e41e3f;">❌ Email already exists</span>';
         }
+    };
+}
 
-        function renderAuth() {
-            document.getElementById('app').innerHTML = `
-            <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#667eea,#764ba2);padding:20px;">
-                <div style="background:white;border-radius:16px;padding:32px;max-width:420px;width:100%;box-shadow:0 10px 40px rgba(0,0,0,0.3);">
-                    <div style="text-align:center;margin-bottom:20px;">
-                        <div style="width:56px;height:56px;background:var(--primary);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:white;font-size:1.8rem;font-weight:800;">W</div>
-                        <h2 style="margin-top:10px;">WorldFG 🌍</h2>
-                        <p style="color:var(--text2);">Connect, Share & Market</p>
-                    </div>
-                    <div style="display:flex;gap:8px;margin-bottom:16px;">
-                        <button id="showLogin" class="btn btn-primary" style="flex:1;">Login</button>
-                        <button id="showRegister" class="btn btn-outline" style="flex:1;">Sign Up</button>
-                    </div>
-                    <div id="authForm"></div>
-                    <div id="authMsg" style="text-align:center;margin-top:10px;color:var(--danger);font-size:0.9rem;"></div>
-                </div>
-            </div>`;
+// ==================== GLOBAL FUNCTIONS ====================
+window.navTo = function(page) { currentPage=page; currentChatUser=null; expandedComposer=false; render(); };
+window.expandComposer = function() { expandedComposer=true; render(); };
+window.triggerMedia = function(type) { const inp=document.getElementById('mediaInput'); inp.accept=type==='image'?'image/*':'video/*'; inp.click(); };
+window.handleMedia = function(e) { if(e.target.files[0]){const r=new FileReader();r.onload=ev=>{pendingMedia=ev.target.result;pendingMediaType=e.target.files[0].type.startsWith('image')?'image':'video';render();};r.readAsDataURL(e.target.files[0]);} };
+window.clearPendingMedia = function() { pendingMedia=null; pendingMediaType=null; render(); };
+window.submitPost = function() { const text=document.getElementById('postText')?.value?.trim()||''; if(!text&&!pendingMedia){alert('Write something or add media!');return;} createPost(text,pendingMedia,pendingMediaType); pendingMedia=null; pendingMediaType=null; expandedComposer=false; render(); };
+window.toggleComments = function(pid) { const el=document.getElementById('comments-'+pid); el.style.display=el.style.display==='block'?'none':'block'; };
+window.submitComment = function(pid) { const inp=document.getElementById('commentInput-'+pid); if(inp&&inp.value.trim()){addComment(pid,inp.value);inp.value='';render();} };
+window.showReactions = function(pid) { document.getElementById('reactions-'+pid).style.display='flex'; };
+window.hideReactions = function(pid) { setTimeout(()=>{document.getElementById('reactions-'+pid).style.display='none';},300); };
+window.doReact = function(pid,emoji) { reactPost(pid,emoji); render(); };
+window.deleteMyPost = function(pid) { if(confirm('Delete post?')){deletePost(pid);render();} };
+window.sharePost = function(pid) { alert('Post shared! 🔄'); };
+window.viewFull = function(url,type) { const d=document.createElement('div');d.className='fullscreen-viewer';d.innerHTML=`${type==='image'?`<img src="${url}">`:`<video src="${url}" controls autoplay></video>`}<span class="fullscreen-close" onclick="this.parentElement.remove()">✕</span>`;d.onclick=e=>{if(e.target===d)d.remove();};document.body.appendChild(d); };
+window.viewUser = function(id) { const u=getUser(id); if(u) alert(`${u.name}\n📍 ${u.location||'Unknown'}\n${u.bio||''}\n✅ Verified: ${isVerified(id)?'Yes':'No'}`); };
+window.openChat = function(uid) { currentPage='messenger'; currentChatUser=uid; render(); };
+window.sendChatMessage = function() { const inp=document.getElementById('msgInput'); if(inp&&inp.value.trim()&&currentChatUser){sendMsg(currentChatUser,inp.value);inp.value='';render();} };
+window.filterChats = function() { const q=(document.getElementById('chatSearch')?.value||'').toLowerCase(); document.querySelectorAll('.chat-user').forEach(el=>{el.style.display=el.querySelector('.chat-user-name')?.innerText?.toLowerCase().includes(q)?'':'none';}); };
+window.addFriend = function(uid) { sendFriendReq(uid); render(); };
+window.acceptFriendReq = function(rid) { acceptReq(rid); render(); };
+window.rejectFriendReq = function(rid) { rejectReq(rid); render(); };
+window.filterFriendSearch = function() { const q=(document.getElementById('friendSearch')?.value||'').toLowerCase(); document.querySelectorAll('#friendsGrid .friend-card').forEach(el=>{el.style.display=(el.dataset.search||'').includes(q)?'':'none';}); };
+window.clearAllNotifs = function() { DB.notifs=DB.notifs.filter(n=>n.userId!==U().id); render(); };
+window.editProfile = function() {
+    const u=U();
+    const d=document.createElement('div');d.className='modal-overlay';
+    d.innerHTML=`<div class="modal-box"><h3>✏️ Edit Profile</h3>
+        <input id="efName" value="${esc(u.name)}" placeholder="Name">
+        <textarea id="efBio" placeholder="Bio">${esc(u.bio||'')}</textarea>
+        <input id="efLoc" value="${esc(u.location||'')}" placeholder="Location">
+        <input id="efMarital" value="${esc(u.marital||'')}" placeholder="Marital Status">
+        <input id="efDob" value="${esc(u.dob||'')}" placeholder="Birthday">
+        <div class="modal-actions">
+            <button class="btn" style="background:#e4e6eb;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;" onclick="this.closest('.modal-overlay').remove()">Cancel</button>
+            <button class="btn" style="background:#1877f2;color:white;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;" id="saveProfileBtn">Save</button>
+        </div></div>`;
+    document.body.appendChild(d);
+    d.querySelector('#saveProfileBtn').onclick=()=>{updateProfile({name:d.querySelector('#efName').value,bio:d.querySelector('#efBio').value,location:d.querySelector('#efLoc').value,marital:d.querySelector('#efMarital').value,dob:d.querySelector('#efDob').value});d.remove();render();};
+    d.onclick=e=>{if(e.target===d)d.remove();};
+};
+window.changeAvatar = function() { const inp=document.createElement('input');inp.type='file';inp.accept='image/*';inp.onchange=e=>{const r=new FileReader();r.onload=ev=>{updateAvatar(ev.target.result);render();};r.readAsDataURL(e.target.files[0]);};inp.click(); };
+window.changeCoverPhoto = function() { const inp=document.createElement('input');inp.type='file';inp.accept='image/*';inp.onchange=e=>{const r=new FileReader();r.onload=ev=>{updateCover(ev.target.result);render();};r.readAsDataURL(e.target.files[0]);};inp.click(); };
+window.createMarketListing = function() {
+    const d=document.createElement('div');d.className='modal-overlay';
+    d.innerHTML=`<div class="modal-box"><h3>📦 Create Listing</h3>
+        <input id="mlTitle" placeholder="Item title">
+        <input id="mlPrice" type="number" placeholder="Price ($)">
+        <input id="mlCat" placeholder="Category">
+        <input id="mlLoc" placeholder="Location">
+        <div class="modal-actions">
+            <button class="btn" style="background:#e4e6eb;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;" onclick="this.closest('.modal-overlay').remove()">Cancel</button>
+            <button class="btn" style="background:#42b72a;color:white;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;" id="createListingBtn">Create</button>
+        </div></div>`;
+    document.body.appendChild(d);
+    d.querySelector('#createListingBtn').onclick=()=>{const t=d.querySelector('#mlTitle').value;const p=d.querySelector('#mlPrice').value;if(!t||!p){alert('Title and price required!');return;}createListing(t,p,d.querySelector('#mlLoc').value,d.querySelector('#mlCat').value);d.remove();render();};
+    d.onclick=e=>{if(e.target===d)d.remove();};
+};
+window.boostItem = function(lid) { boostListing(lid); render(); };
+window.contactSeller = function(uid) { currentPage='messenger'; currentChatUser=uid; render(); };
+window.startLiveStream = function() { startLive(); render(); };
+window.joinLive = function(lid) { const l=DB.live.find(x=>x.id===lid); if(l){l.viewers=(l.viewers||0)+1;DB.live=DB.live;alert('🔴 Joining: '+l.title+'\n(Simulated live stream)');} };
+window.scrollChat = function() { setTimeout(()=>{const el=document.getElementById('chatMsgs');if(el)el.scrollTop=el.scrollHeight;},100); };
+window.searchGlobal = function() {
+    const q = (document.getElementById('globalSearch')?.value||'').toLowerCase();
+    const results = document.getElementById('searchResults');
+    if(!q || q.length<2) { results.style.display='none'; return; }
+    const found = DB.users.filter(u=>u.id!==U().id&&(u.name.toLowerCase().includes(q)||(u.location||'').toLowerCase().includes(q)));
+    results.innerHTML = found.length===0?'<div style="padding:16px;">No results</div>':found.map(u=>`
+        <div style="display:flex;align-items:center;gap:10px;padding:10px 16px;cursor:pointer;border-bottom:1px solid #eee;" onclick="viewUser(${u.id});document.getElementById('searchResults').style.display='none';">
+            <img src="${u.avatar}" style="width:36px;height:36px;border-radius:50%;object-fit:cover;">
+            <div><strong>${esc(u.name)}</strong> ${isVerified(u.id)?'✅':''}<br><small>📍 ${esc(u.location||'')}</small></div>
+        </div>
+    `).join('');
+    results.style.display='block';
+};
 
-            function showLoginForm() {
-                document.getElementById('showLogin').className = 'btn btn-primary';
-                document.getElementById('showLogin').style.flex = '1';
-                document.getElementById('showRegister').className = 'btn btn-outline';
-                document.getElementById('showRegister').style.flex = '1';
-                document.getElementById('authForm').innerHTML = `
-                    <input id="loginEmail" placeholder="Email" style="width:100%;padding:10px;margin-bottom:8px;border:1px solid var(--border);border-radius:8px;font-size:0.9rem;">
-                    <input id="loginPass" type="password" placeholder="Password" style="width:100%;padding:10px;margin-bottom:12px;border:1px solid var(--border);border-radius:8px;font-size:0.9rem;">
-                    <button id="doLogin" class="btn btn-primary" style="width:100%;">🔓 Login</button>
-                    <p style="text-align:center;margin-top:10px;font-size:0.8rem;color:var(--text2);">Demo: test@test.com / 123456</p>
-                `;
-                document.getElementById('doLogin').onclick = () => {
-                    if (login(document.getElementById('loginEmail').value, document.getElementById('loginPass')
-                            .value)) {
-                        render();
-                    } else {
-                        document.getElementById('authMsg').innerText = '❌ Invalid credentials';
-                    }
-                };
-            }
-
-            function showRegForm() {
-                document.getElementById('showRegister').className = 'btn btn-primary';
-                document.getElementById('showRegister').style.flex = '1';
-                document.getElementById('showLogin').className = 'btn btn-outline';
-                document.getElementById('showLogin').style.flex = '1';
-                document.getElementById('authForm').innerHTML = `
-                    <input id="regName" placeholder="Full Name" style="width:100%;padding:10px;margin-bottom:8px;border:1px solid var(--border);border-radius:8px;font-size:0.9rem;">
-                    <input id="regEmail" placeholder="Email" style="width:100%;padding:10px;margin-bottom:8px;border:1px solid var(--border);border-radius:8px;font-size:0.9rem;">
-                    <input id="regPass" type="password" placeholder="Password (6+ chars)" style="width:100%;padding:10px;margin-bottom:8px;border:1px solid var(--border);border-radius:8px;font-size:0.9rem;">
-                    <input id="regDob" placeholder="Birthday (YYYY-MM-DD)" style="width:100%;padding:10px;margin-bottom:8px;border:1px solid var(--border);border-radius:8px;font-size:0.9rem;">
-                    <input id="regMarital" placeholder="Marital Status" style="width:100%;padding:10px;margin-bottom:8px;border:1px solid var(--border);border-radius:8px;font-size:0.9rem;">
-                    <input id="regAddress" placeholder="Address" style="width:100%;padding:10px;margin-bottom:8px;border:1px solid var(--border);border-radius:8px;font-size:0.9rem;">
-                    <textarea id="regBio" placeholder="Bio" rows="2" style="width:100%;padding:10px;margin-bottom:12px;border:1px solid var(--border);border-radius:8px;font-size:0.9rem;resize:vertical;"></textarea>
-                    <button id="doRegister" class="btn btn-success" style="width:100%;">✨ Create Account</button>
-                `;
-                document.getElementById('doRegister').onclick = () => {
-                    const data = {
-                        fullname: document.getElementById('regName').value,
-                        email: document.getElementById('regEmail').value,
-                        password: document.getElementById('regPass').value,
-                        dob: document.getElementById('regDob').value,
-                        marital: document.getElementById('regMarital').value,
-                        address: document.getElementById('regAddress').value,
-                        bio: document.getElementById('regBio').value
-                    };
-                    if (!data.fullname || !data.email || !data.password) {
-                        document.getElementById('authMsg').innerText = '❌ Name, email, password required';
-                        return;
-                    }
-                    if (data.password.length < 6) {
-                        document.getElementById('authMsg').innerText = '❌ Password must be 6+ characters';
-                        return;
-                    }
-                    if (register(data)) {
-                        document.getElementById('authMsg').innerHTML =
-                            '<span style="color:green;">✅ Created! Please login.</span>';
-                        setTimeout(showLoginForm, 1200);
-                    } else {
-                        document.getElementById('authMsg').innerText = '❌ Email already exists';
-                    }
-                };
-            }
-
-            document.getElementById('showLogin').onclick = showLoginForm;
-            document.getElementById('showRegister').onclick = showRegForm;
-            showLoginForm();
+function attachEvents() {
+    if(currentPage==='messenger'&&currentChatUser) scrollChat();
+    document.addEventListener('click', function(e) {
+        if(!e.target.closest('#searchResults') && !e.target.closest('#globalSearch')) {
+            const results = document.getElementById('searchResults');
+            if(results) results.style.display='none';
         }
+    });
+}
 
-        // ==================== EVENT HANDLERS ====================
-        function attachEvents() {
-            // Expose all needed functions globally
-            window.expandComposer = () => { document.getElementById('composerExpanded').style.display = 'block';
-                document.getElementById('composerInput').style.display = 'none'; };
-            window.triggerFileInput = (type) => { const inp = document.getElementById('postFileInput');
-                inp.accept = type === 'image' ? 'image/*' : 'video/*';
-                inp.click(); };
-            window.handleFileSelect = (e) => {
-                if (e.target.files[0]) {
-                    const r = new FileReader();
-                    r.onload = ev => { pendingMedia = ev.target.result;
-                        pendingMediaType = e.target.files[0].type.startsWith('image') ? 'image' : 'video';
-                        render(); };
-                    r.readAsDataURL(e.target.files[0]);
-                }
-            };
-            window.clearPending = () => { pendingMedia = null;
-                pendingMediaType = null;
-                render(); };
-            window.submitPost = () => {
-                const text = document.getElementById('composerText')?.value?.trim() || '';
-                if (!text && !pendingMedia) { alert('Write something or add media! 😊'); return; }
-                createPost(text, pendingMedia, pendingMediaType);
-                pendingMedia = null;
-                pendingMediaType = null;
-                render();
-            };
-            window.toggleComments = (pid) => {
-                const el = document.getElementById('comments-' + pid);
-                el.style.display = el.style.display === 'block' ? 'none' : 'block';
-            };
-            window.submitComment = (pid) => {
-                const inp = document.getElementById('commentInput-' + pid);
-                if (inp && inp.value.trim()) { addComment(pid, inp.value);
-                    inp.value = '';
-                    render(); }
-            };
-            window.reactToPost = (pid, emoji) => { reactPost(pid, emoji);
-                render(); };
-            window.deleteMyPost = (pid) => { if (confirm('Delete this post? 🗑️')) { deletePost(pid);
-                    render(); } };
-            window.viewFull = (url, type) => {
-                const div = document.createElement('div');
-                div.className = 'fullscreen';
-                div.innerHTML =
-                    `${type==='image'?`<img src="${url}">`:`<video src="${url}" controls autoplay></video>`}<span style="position:absolute;top:20px;right:20px;color:white;font-size:2rem;cursor:pointer;">✕</span>`;
-                document.body.appendChild(div);
-                div.onclick = (e) => { if (e.target === div || e.target.tagName === 'SPAN') div.remove(); };
-            };
-            window.viewUser = (id) => {
-                const u = getUsers().find(x => x.id === id);
-                if (u) alert(u.fullname + '\n' + (u.bio || 'No bio') + '\n📍 ' + (u.address || 'Unknown') +
-                    '\n✅ Verified: ' + (isVerified(id) ? 'Yes' : 'No'));
-            };
-            window.openChat = (uid) => { currentPage = 'messenger';
-                currentChatId = uid;
-                render(); };
-            window.contactSeller = (uid) => { currentPage = 'messenger';
-                currentChatId = uid;
-                render(); };
-            window.sendChatMsg = () => {
-                const inp = document.getElementById('msgInput');
-                if (inp && inp.value.trim() && currentChatId) { sendMsg(currentChatId, inp.value);
-                    inp.value = '';
-                    render(); }
-            };
-            window.changeCover = () => {
-                const inp = document.createElement('input');
-                inp.type = 'file';
-                inp.accept = 'image/*';
-                inp.onchange = e => {
-                    const r = new FileReader();
-                    r.onload = ev => { updateCoverPic(ev.target.result);
-                        render(); };
-                    r.readAsDataURL(e.target.files[0]);
-                };
-                inp.click();
-            };
-            window.changeProfilePic = () => {
-                const inp = document.createElement('input');
-                inp.type = 'file';
-                inp.accept = 'image/*';
-                inp.onchange = e => {
-                    const r = new FileReader();
-                    r.onload = ev => { updateProfilePic(ev.target.result);
-                        render(); };
-                    r.readAsDataURL(e.target.files[0]);
-                };
-                inp.click();
-            };
-            window.uploadNewMedia = () => {
-                const inp = document.createElement('input');
-                inp.type = 'file';
-                inp.accept = 'image/*,video/*';
-                inp.onchange = e => {
-                    if (e.target.files[0]) {
-                        const url = URL.createObjectURL(e.target.files[0]);
-                        uploadMedia(e.target.files[0].type.startsWith('image') ? 'image' : 'video', url);
-                        render();
-                    }
-                };
-                inp.click();
-            };
-            window.switchProfileTab = (tab) => {
-                document.querySelectorAll('.profile-tab').forEach(t => t.classList.remove('active'));
-                event.target.classList.add('active');
-                document.getElementById('profilePosts').style.display = tab === 'posts' ? 'block' : 'none';
-                document.getElementById('profileMedia').style.display = tab === 'media' ? 'block' : 'none';
-                document.getElementById('profileAbout').style.display = tab === 'about' ? 'block' : 'none';
-            };
-            window.openEditProfile = () => {
-                const u = currentUser();
-                const div = document.createElement('div');
-                div.className = 'modal-overlay';
-                div.innerHTML = `
-                <div class="modal-box">
-                    <h3>✏️ Edit Profile</h3>
-                    <input id="efName" value="${esc(u.fullname)}" placeholder="Full Name">
-                    <textarea id="efBio" placeholder="Bio">${esc(u.bio||'')}</textarea>
-                    <input id="efMarital" value="${esc(u.marital||'')}" placeholder="Marital Status">
-                    <input id="efAddress" value="${esc(u.address||'')}" placeholder="Address">
-                    <input id="efDob" value="${esc(u.dob||'')}" placeholder="Birthday">
-                    <div class="modal-actions">
-                        <button class="btn btn-outline" onclick="this.closest('.modal-overlay').remove()">Cancel</button>
-                        <button class="btn btn-primary" id="saveProfile">Save</button>
-                    </div>
-                </div>`;
-                document.body.appendChild(div);
-                div.querySelector('#saveProfile').onclick = () => {
-                    updateProfile({ fullname: div.querySelector('#efName').value, bio: div.querySelector(
-                            '#efBio').value, marital: div.querySelector('#efMarital').value,
-                        address: div.querySelector('#efAddress').value, dob: div.querySelector('#efDob')
-                            .value });
-                    div.remove();
-                    render();
-                };
-                div.onclick = e => { if (e.target === div) div.remove(); };
-            };
-            window.openSettings = () => {
-                const s = getSettings();
-                const div = document.createElement('div');
-                div.className = 'modal-overlay';
-                div.innerHTML = `
-                <div class="modal-box">
-                    <h3>⚙️ Settings</h3>
-                    <div class="toggle-row"><span>🔔 Notifications</span><div class="toggle-sw ${s.notifs?'on':''}" id="togNotifs"></div></div>
-                    <div class="toggle-row"><span>🔒 Two-Factor Auth</span><div class="toggle-sw ${s.twoFactor?'on':''}" id="tog2FA"></div></div>
-                    <div class="toggle-row"><span>👁 Privacy</span><select id="privSel" style="width:auto;padding:6px;border-radius:6px;border:1px solid var(--border);">${['Public','Friends Only','Only Me'].map(o=>`<option ${s.privacy===o?'selected':''}>${o}</option>`).join('')}</select></div>
-                    <button class="btn btn-outline" style="width:100%;margin-top:8px;" id="changePassBtn">🔑 Change Password</button>
-                    <div style="border-top:2px solid var(--danger);margin-top:12px;padding-top:12px;">
-                        <button class="btn btn-danger" style="width:100%;" id="delAccBtn">🗑️ Delete Account</button>
-                    </div>
-                    <div class="modal-actions"><button class="btn btn-primary" onclick="this.closest('.modal-overlay').remove()">Close</button></div>
-                </div>`;
-                document.body.appendChild(div);
-                div.querySelector('#togNotifs').onclick = function() { const ns = getSettings();
-                    ns.notifs = !ns.notifs;
-                    setSettings(ns);
-                    this.classList.toggle('on'); };
-                div.querySelector('#tog2FA').onclick = function() { const ns = getSettings();
-                    ns.twoFactor = !ns.twoFactor;
-                    setSettings(ns);
-                    this.classList.toggle('on');
-                    alert(ns.twoFactor ? '2FA Enabled 🔒' : '2FA Disabled'); };
-                div.querySelector('#privSel').onchange = function() { const ns = getSettings();
-                    ns.privacy = this.value;
-                    setSettings(ns); };
-                div.querySelector('#changePassBtn').onclick = () => {
-                    const pw = prompt('New password (6+ chars):');
-                    if (pw && pw.length >= 6) { const u = getUsers(); const cu = u.find(x => x.id === currentUser()
-                            .id);
-                        cu.password = pw;
-                        setUsers(u);
-                        alert('Password changed! ✅'); } else if (pw) alert('Too short!');
-                };
-                div.querySelector('#delAccBtn').onclick = () => {
-                    if (confirm('PERMANENTLY DELETE your account? ⚠️')) {
-                        const uid = currentUser().id;
-                        setUsers(getUsers().filter(u => u.id !== uid));
-                        setPosts(getPosts().filter(p => p.userId !== uid));
-                        setFriendReqs(getFriendReqs().filter(r => r.fromId !== uid && r.toId !== uid));
-                        setFriendships(getFriendships().filter(f => f.userId !== uid && f.friendId !== uid));
-                        setMessages(getMessages().filter(m => m.fromId !== uid && m.toId !== uid));
-                        setNotifs(getNotifs().filter(n => n.userId !== uid));
-                        setMarketplace(getMarketplace().filter(l => l.userId !== uid));
-                        setLivestreams(getLivestreams().filter(l => l.userId !== uid));
-                        setSession(null);
-                        div.remove();
-                        render();
-                    }
-                };
-                div.onclick = e => { if (e.target === div) div.remove(); };
-            };
-            window.openCreateListing = () => {
-                const div = document.createElement('div');
-                div.className = 'modal-overlay';
-                div.innerHTML = `
-                <div class="modal-box">
-                    <h3>📦 Create Listing</h3>
-                    <input id="lTitle" placeholder="Item title">
-                    <input id="lPrice" type="number" placeholder="Price ($)">
-                    <input id="lCat" placeholder="Category">
-                    <input id="lLoc" placeholder="Location">
-                    <input type="file" id="lPhoto" accept="image/*">
-                    <div class="modal-actions">
-                        <button class="btn btn-outline" onclick="this.closest('.modal-overlay').remove()">Cancel</button>
-                        <button class="btn btn-primary" id="createListingBtn">Create</button>
-                    </div>
-                </div>`;
-                document.body.appendChild(div);
-                let photoData = null;
-                div.querySelector('#lPhoto').onchange = e => {
-                    if (e.target.files[0]) { const r = new FileReader();
-                        r.onload = ev => photoData = ev.target.result;
-                        r.readAsDataURL(e.target.files[0]); }
-                };
-                div.querySelector('#createListingBtn').onclick = () => {
-                    const title = div.querySelector('#lTitle').value;
-                    const price = div.querySelector('#lPrice').value;
-                    if (!title || !price) { alert('Title and price required!'); return; }
-                    createListing(title, photoData, price, div.querySelector('#lCat').value, div.querySelector(
-                        '#lLoc').value);
-                    div.remove();
-                    render();
-                };
-                div.onclick = e => { if (e.target === div) div.remove(); };
-            };
-            window.joinLive = (lid) => {
-                const ls = getLivestreams();
-                const l = ls.find(x => x.id === lid);
-                if (l) { l.viewers = (l.viewers || 0) + 1;
-                    setLivestreams(ls);
-                    alert('🔴 Joining: ' + l.title + '\n(Simulated live stream)'); }
-            };
-            window.filterChats = () => {
-                const q = document.getElementById('chatSearch')?.value?.toLowerCase() || '';
-                document.querySelectorAll('.chat-user').forEach(el => {
-                    el.style.display = el.querySelector('.name')?.innerText?.toLowerCase().includes(q) ?
-                        '' : 'none';
-                });
-            };
-            window.filterFriends = () => {
-                const q = document.getElementById('friendSearch')?.value?.toLowerCase() || '';
-                document.querySelectorAll('#friendsGrid .friend-card').forEach(el => {
-                    el.style.display = (el.dataset.name || '').includes(q) ? '' : 'none';
-                });
-            };
-            window.clearNotifs = () => { setNotifs(getNotifs().filter(n => n.userId !== currentUser().id));
-                render(); };
-
-            // Reaction hover
-            document.querySelectorAll('.reaction-btn').forEach(btn => {
-                const pid = btn.dataset.pid;
-                const reactionsDiv = document.getElementById('reactions-' + pid);
-                if (reactionsDiv) {
-                    btn.addEventListener('mouseenter', () => reactionsDiv.style.display = 'flex');
-                    btn.addEventListener('mouseleave', () => setTimeout(() => { if (!reactionsDiv.matches(
-                            ':hover')) reactionsDiv.style.display = 'none'; }, 200));
-                    reactionsDiv.addEventListener('mouseleave', () => reactionsDiv.style.display = 'none');
-                    reactionsDiv.addEventListener('mouseenter', () => reactionsDiv.style.display = 'flex');
-                }
-            });
-
-            // Scroll chat to bottom
-            const chatMsgs = document.getElementById('chatMsgs');
-            if (chatMsgs) chatMsgs.scrollTop = chatMsgs.scrollHeight;
-        }
-
-        // ==================== INIT ====================
-        function initDB() {
-            if (getUsers().length === 0) {
-                const demo = {
-                    id: 1,
-                    fullname: "John Anderson",
-                    email: "test@test.com",
-                    password: "123456",
-                    dob: "1992-05-15",
-                    marital: "Married 💍",
-                    address: "San Francisco, CA 🌉",
-                    bio: "Welcome to WorldFG! 🌍 Let's connect, share, and grow! 🚀",
-                    profilePic: "https://randomuser.me/api/portraits/men/32.jpg",
-                    coverPic: "https://picsum.photos/id/1043/1200/400",
-                    media: [],
-                    followers: [],
-                    following: [],
-                    createdAt: new Date('2024-01-01').toISOString()
-                };
-                setUsers([demo]);
-                setPosts([{
-                    id: 100,
-                    userId: 1,
-                    text: "🚀 Welcome to WorldFG! The ultimate social platform with emojis everywhere! 😍🎉\n\n✅ Post photos & videos\n🔴 Go LIVE\n🛒 Sell on Marketplace\n💬 Chat with friends\n🔵 Get verified!\n\nStart exploring! 👇",
-                    mediaUrl: null,
-                    mediaType: null,
-                    likes: [],
-                    reactions: { 1: '❤️' },
-                    comments: [{ userId: 1, username: 'John Anderson',
-                        text: 'First comment! Love this platform! 😍🔥', timestamp: Date.now() -
-                        1800000 }],
-                    timestamp: Date.now() - 3600000,
-                    isMarketplace: false
-                }]);
-                setMarketplace([{
-                    id: 200,
-                    userId: 1,
-                    text: "Vintage Leather Jacket 🧥",
-                    mediaUrl: "https://picsum.photos/seed/jacket1/400/300",
-                    mediaType: 'image',
-                    price: "75",
-                    category: "Clothing",
-                    location: "San Francisco, CA",
-                    boosted: false,
-                    timestamp: Date.now() - 7200000
-                }, {
-                    id: 201,
-                    userId: 1,
-                    text: "Gaming PC - RTX 4080 🎮",
-                    mediaUrl: "https://picsum.photos/seed/gamingpc/400/300",
-                    mediaType: 'image',
-                    price: "1500",
-                    category: "Electronics",
-                    location: "San Francisco, CA",
-                    boosted: true,
-                    timestamp: Date.now() - 86400000
-                }]);
-                setLivestreams([{
-                    id: 300,
-                    userId: 1,
-                    title: "Chill Music & Chat 🎵",
-                    thumbnail: "https://picsum.photos/seed/livestream1/400/250",
-                    viewers: 42,
-                    startedAt: Date.now() - 1800000
-                }]);
-                setVerifications([1]);
-                setFriendships([]);
-                setFriendReqs([]);
-                setMessages([]);
-                setNotifs([]);
-                setSettings({ notifs: true, privacy: 'Public', twoFactor: false });
-            }
-        }
-
-        initDB();
-        render();
-        console.log('✅ WorldFG loaded successfully! 🚀');
-        console.log('Demo login: test@test.com / 123456');
-    </script>
+// Start the app
+render();
+console.log('✅ WorldFG is LIVE! Connect, share, market, and more! 🌍');
+console.log('Login: test@test.com / 123456');
+</script>
 </body>
 </html>
