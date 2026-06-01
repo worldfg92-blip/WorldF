@@ -1,533 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-  <title>SocialConnect • Professional Meta‑Style Platform</title>
-  <!-- Font Awesome 6 for icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    }
-    body {
-      background: #f0f2f5;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      min-height: 100vh;
-      padding: 0;
-    }
-    /* main container – Facebook classic layout */
-    .app-container {
-      max-width: 1400px;
-      width: 100%;
-      margin: 0 auto;
-      background: #f0f2f5;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      box-shadow: 0 0 30px rgba(0,0,0,0.05);
-    }
-    /* header – Facebook style top bar */
-    .fb-header {
-      background: #ffffff;
-      padding: 8px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid #ddd;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-    }
-    .logo-search {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex: 1;
-    }
-    .logo {
-      font-size: 2rem;
-      color: #1877f2;
-      font-weight: bold;
-    }
-    .search-box {
-      background: #f0f2f5;
-      border-radius: 20px;
-      padding: 8px 16px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex: 0.7;
-      max-width: 280px;
-    }
-    .search-box i {
-      color: #65676b;
-    }
-    .search-box input {
-      border: none;
-      background: transparent;
-      outline: none;
-      font-size: 0.95rem;
-      width: 100%;
-    }
-    .header-icons {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      font-size: 1.4rem;
-      color: #545454;
-    }
-    .header-icons i {
-      cursor: pointer;
-      padding: 8px;
-      border-radius: 50%;
-      transition: 0.2s;
-    }
-    .header-icons i:hover {
-      background: #e4e6eb;
-    }
-    .user-avatar {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: #1877f2;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    /* main layout: left sidebar, feed, right sidebar */
-    .content-grid {
-      display: flex;
-      flex: 1;
-      padding: 16px 16px 0;
-      gap: 12px;
-    }
-    .left-sidebar {
-      width: 280px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .right-sidebar {
-      width: 300px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-    .main-feed {
-      flex: 1;
-      max-width: 680px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-    /* cards style */
-    .card {
-      background: white;
-      border-radius: 8px;
-      padding: 12px 16px;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-    }
-    .sidebar-link {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 8px 12px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 0.95rem;
-      font-weight: 500;
-      color: #050505;
-    }
-    .sidebar-link i {
-      width: 24px;
-      color: #1877f2;
-      font-size: 1.2rem;
-    }
-    .sidebar-link:hover {
-      background: #e4e6eb;
-    }
-    .trend-item {
-      padding: 8px 0;
-      border-bottom: 1px solid #f0f2f5;
-      font-size: 0.9rem;
-      cursor: pointer;
-    }
-    .trend-item strong {
-      display: block;
-    }
-    /* status / post creator */
-    .status-box {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px;
-    }
-    .status-input {
-      background: #f0f2f5;
-      border-radius: 20px;
-      flex: 1;
-      padding: 10px 16px;
-      cursor: pointer;
-      color: #65676b;
-      border: none;
-      outline: none;
-    }
-    .post-actions {
-      display: flex;
-      justify-content: space-around;
-      border-top: 1px solid #eee;
-      padding-top: 10px;
-      margin-top: 5px;
-    }
-    .post-actions span {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      cursor: pointer;
-      font-size: 0.9rem;
-      color: #65676b;
-    }
-    /* post card */
-    .post {
-      margin-bottom: 16px;
-    }
-    .post-header {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-    .post-header .name {
-      font-weight: 600;
-    }
-    .verified-badge {
-      color: #1877f2;
-      font-size: 0.8rem;
-      margin-left: 4px;
-    }
-    .post-image {
-      width: 100%;
-      border-radius: 8px;
-      margin: 8px 0;
-      max-height: 400px;
-      object-fit: cover;
-    }
-    .reactions {
-      display: flex;
-      justify-content: space-between;
-      padding: 8px 0;
-      border-top: 1px solid #eee;
-      margin-top: 8px;
-    }
-    .reactions i {
-      margin-right: 4px;
-      cursor: pointer;
-    }
-    /* marketplace / live tiles */
-    .marketplace-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    .market-item {
-      background: #f0f2f5;
-      border-radius: 8px;
-      padding: 8px;
-      flex: 1 1 calc(50% - 8px);
-      text-align: center;
-      cursor: pointer;
-    }
-    .live-badge {
-      background: #e41e3f;
-      color: white;
-      padding: 2px 8px;
-      border-radius: 12px;
-      font-size: 0.7rem;
-      font-weight: bold;
-    }
-    button {
-      background: #1877f2;
-      color: white;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 6px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-    .boost-btn {
-      background: #f7b928;
-      color: black;
-      font-size: 0.8rem;
-      padding: 4px 10px;
-    }
-    /* messenger floating style */
-    .messenger-bar {
-      position: fixed;
-      bottom: 0;
-      right: 20px;
-      width: 280px;
-      background: white;
-      border-radius: 8px 8px 0 0;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
-      display: flex;
-      flex-direction: column;
-      max-height: 350px;
-      z-index: 200;
-    }
-    .msg-header {
-      background: #1877f2;
-      color: white;
-      padding: 10px;
-      border-radius: 8px 8px 0 0;
-      display: flex;
-      justify-content: space-between;
-    }
-    .chat-area {
-      padding: 10px;
-      overflow-y: auto;
-      flex: 1;
-      background: #fafafa;
-    }
-    .friend-list {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-    .friend-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    .friend-item:hover {
-      background: #e4e6eb;
-    }
-    @media (max-width: 1000px) {
-      .left-sidebar, .right-sidebar {
-        display: none;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SocialConnect - Real Social Network</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-<div class="app-container">
-  <!-- Header -->
-  <header class="fb-header">
-    <div class="logo-search">
-      <div class="logo"><i class="fab fa-facebook"></i></div>
-      <div class="search-box">
-        <i class="fas fa-search"></i>
-        <input type="text" placeholder="Search users, locations...">
-      </div>
-    </div>
-    <div class="header-icons">
-      <i class="fas fa-home"></i>
-      <i class="fas fa-users"></i>
-      <i class="fas fa-store"></i>
-      <i class="fas fa-video"></i>
-      <i class="fas fa-bell"></i>
-      <div class="user-avatar">M</div>
-    </div>
-  </header>
-
-  <div class="content-grid">
-    <!-- Left Sidebar -->
-    <div class="left-sidebar">
-      <div class="card">
-        <div class="sidebar-link"><i class="fas fa-user-friends"></i> Friends</div>
-        <div class="sidebar-link"><i class="fas fa-clock"></i> Memories</div>
-        <div class="sidebar-link"><i class="fas fa-store"></i> Marketplace</div>
-        <div class="sidebar-link"><i class="fas fa-video"></i> Live Streaming</div>
-        <div class="sidebar-link"><i class="fas fa-newspaper"></i> News Feed</div>
-        <div class="sidebar-link"><i class="fas fa-cog"></i> Settings</div>
-      </div>
-    </div>
-
-    <!-- Main Feed -->
-    <main class="main-feed">
-      <!-- Status / Post creator -->
-      <div class="card">
-        <div class="status-box">
-          <div class="user-avatar" style="width:40px; height:40px;">U</div>
-          <input class="status-input" placeholder="What's on your mind? (Status/Photo/Video)" id="statusInput">
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <div class="logo">
+                <i class="fab fa-facebook"></i>
+                <span>SocialConnect</span>
+            </div>
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Search users, posts, locations...">
+                <div class="search-results" id="searchResults"></div>
+            </div>
         </div>
-        <div class="post-actions">
-          <span><i class="fas fa-video" style="color:#e41e3f;"></i> Live</span>
-          <span><i class="fas fa-camera"></i> Photo/Video</span>
-          <span><i class="fas fa-smile"></i> Feeling</span>
+        <div class="header-center">
+            <nav class="nav-icons">
+                <a href="index.html" class="nav-icon active"><i class="fas fa-home"></i></a>
+                <a href="friends.html" class="nav-icon"><i class="fas fa-user-friends"></i></a>
+                <a href="marketplace.html" class="nav-icon"><i class="fas fa-store"></i></a>
+                <a href="live.html" class="nav-icon"><i class="fas fa-video"></i></a>
+                <a href="videos.html" class="nav-icon"><i class="fas fa-play-circle"></i></a>
+            </nav>
         </div>
-      </div>
+        <div class="header-right">
+            <div class="user-menu">
+                <div class="notification-bell" id="notificationBell">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-count" id="notifCount">0</span>
+                </div>
+                <div class="messenger-icon" id="messengerIcon">
+                    <i class="fab fa-facebook-messenger"></i>
+                    <span class="msg-count" id="msgCount">0</span>
+                </div>
+                <div class="user-profile" id="userProfileBtn">
+                    <img src="https://via.placeholder.com/40" alt="Profile" id="currentUserAvatar">
+                    <span id="currentUserName">You</span>
+                </div>
+                <div class="dropdown-menu" id="userDropdown">
+                    <a href="profile.html">My Profile</a>
+                    <a href="settings.html">Settings & Privacy</a>
+                    <a href="#" id="logoutBtn">Logout</a>
+                </div>
+            </div>
+        </div>
+    </header>
 
-      <!-- Sample Post with verified user & reactions -->
-      <div class="card post">
-        <div class="post-header">
-          <div class="user-avatar">JD</div>
-          <div>
-            <span class="name">Jane Doe <i class="fas fa-check-circle verified-badge"></i></span>
-            <div style="font-size:0.8rem; color:#65676b;">Lagos, Nigeria • 2h</div>
-          </div>
+    <!-- Notifications Panel -->
+    <div class="notifications-panel" id="notificationsPanel">
+        <div class="panel-header">
+            <h3>Notifications</h3>
+            <button id="clearNotifs">Clear All</button>
         </div>
-        <p>Enjoying the new marketplace features! 🚀</p>
-        <img class="post-image" src="https://placehold.co/600x300/1877f2/white?text=Social+Connect+Marketplace" alt="post">
-        <div class="reactions">
-          <span><i class="far fa-thumbs-up"></i> Like</span>
-          <span><i class="far fa-heart"></i> Love</span>
-          <span><i class="far fa-laugh"></i> Haha</span>
-          <span><i class="far fa-comment"></i> Comment</span>
+        <div class="notifications-list" id="notificationsList">
+            <p>No notifications yet</p>
         </div>
-      </div>
-
-      <!-- Live streaming card -->
-      <div class="card">
-        <div style="display:flex; align-items:center; gap:8px;">
-          <span class="live-badge"><i class="fas fa-circle" style="color:red;"></i> LIVE</span>
-          <strong>John Smith is streaming • 24 viewers</strong>
-        </div>
-        <div style="background:#000; border-radius:8px; margin:10px 0; padding:20px; color:white; text-align:center;">
-          <i class="fas fa-video" style="font-size:2rem;"></i>
-          <p>Live from Accra | Music & Chat</p>
-          <button style="background:#e41e3f;">Join Stream</button>
-        </div>
-      </div>
-    </main>
-
-    <!-- Right Sidebar: Trending, Marketplace, Verification -->
-    <div class="right-sidebar">
-      <div class="card">
-        <h4 style="margin-bottom:8px;"><i class="fas fa-chart-line"></i> Trending Topics</h4>
-        <div class="trend-item"><strong>#AfricaTech</strong> 2.4K posts</div>
-        <div class="trend-item"><strong>#BlueVerification</strong> trending</div>
-        <div class="trend-item"><strong>MarketplaceBoost</strong></div>
-      </div>
-      <div class="card">
-        <h4 style="margin-bottom:8px;"><i class="fas fa-store"></i> Marketplace</h4>
-        <div class="marketplace-grid">
-          <div class="market-item">👟 Sneakers $50 <br><button class="boost-btn">Boost</button></div>
-          <div class="market-item">📱 iPhone $300 <br><button class="boost-btn">Boost</button></div>
-        </div>
-      </div>
-      <div class="card">
-        <h4><i class="fas fa-user-check"></i> Profile Verification</h4>
-        <p style="font-size:0.8rem;">Request blue checkmark in Settings.</p>
-        <button style="width:100%;">Go to Settings</button>
-      </div>
     </div>
-  </div>
 
-  <!-- Messenger / Chat Floating Widget -->
-  <div class="messenger-bar" id="messengerWidget">
-    <div class="msg-header">
-      <span><i class="fab fa-facebook-messenger"></i> Chats</span>
-      <i class="fas fa-times" onclick="document.getElementById('messengerWidget').style.display='none'"></i>
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Left Sidebar -->
+        <aside class="left-sidebar">
+            <div class="sidebar-card">
+                <a href="profile.html" class="sidebar-link">
+                    <img src="https://via.placeholder.com/36" alt="Profile">
+                    <span id="sidebarUserName">Your Name</span>
+                </a>
+                <a href="friends.html" class="sidebar-link">
+                    <i class="fas fa-user-friends"></i>
+                    <span>Friends</span>
+                    <span class="badge" id="friendsCount">0</span>
+                </a>
+                <a href="videos.html" class="sidebar-link">
+                    <i class="fas fa-play-circle"></i>
+                    <span>Funny Videos</span>
+                </a>
+                <a href="marketplace.html" class="sidebar-link">
+                    <i class="fas fa-store"></i>
+                    <span>Marketplace</span>
+                </a>
+                <a href="live.html" class="sidebar-link">
+                    <i class="fas fa-video"></i>
+                    <span>Live Streaming</span>
+                </a>
+                <a href="settings.html" class="sidebar-link">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Feed -->
+        <main class="main-feed">
+            <!-- Status Creator -->
+            <div class="status-creator card">
+                <div class="status-top">
+                    <img src="https://via.placeholder.com/40" alt="You">
+                    <input type="text" id="statusInput" placeholder="What's on your mind?">
+                </div>
+                <div class="status-options">
+                    <button id="liveVideoBtn"><i class="fas fa-video"></i> Live Video</button>
+                    <button id="photoVideoBtn"><i class="fas fa-camera"></i> Photo/Video</button>
+                    <button id="feelingBtn"><i class="fas fa-smile"></i> Feeling/Activity</button>
+                </div>
+                <input type="file" id="mediaUpload" accept="image/*,video/*" capture="environment" style="display:none;">
+            </div>
+
+            <!-- News Feed -->
+            <div class="news-feed" id="newsFeed">
+                <!-- Posts will be dynamically loaded here -->
+            </div>
+        </main>
+
+        <!-- Right Sidebar -->
+        <aside class="right-sidebar">
+            <!-- Trending Topics -->
+            <div class="sidebar-card">
+                <h3><i class="fas fa-fire"></i> Trending Topics</h3>
+                <div class="trending-list" id="trendingTopics">
+                    <div class="trend-item"><strong>#TechNews</strong><span>12K posts</span></div>
+                    <div class="trend-item"><strong>#ComedySkits</strong><span>8.5K posts</span></div>
+                    <div class="trend-item"><strong>#MarketDeals</strong><span>5.2K posts</span></div>
+                </div>
+            </div>
+
+            <!-- Live Streams -->
+            <div class="sidebar-card">
+                <h3><i class="fas fa-broadcast-tower"></i> Live Now</h3>
+                <div class="live-now" id="liveNow">
+                    <div class="live-item">
+                        <span class="live-dot"></span>
+                        <span>Music Show</span>
+                        <small>245 watching</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Friend Suggestions -->
+            <div class="sidebar-card">
+                <h3>People You May Know</h3>
+                <div class="friend-suggestions" id="friendSuggestions"></div>
+            </div>
+        </aside>
     </div>
-    <div class="chat-area">
-      <div class="friend-list">
-        <div class="friend-item"><div class="user-avatar" style="width:30px;height:30px;">A</div> Alex (Online)</div>
-        <div class="friend-item"><div class="user-avatar" style="width:30px;height:30px;">B</div> Blessing</div>
-        <div class="friend-item"><div class="user-avatar" style="width:30px;height:30px;">C</div> Charles</div>
-      </div>
-      <input type="text" placeholder="Type a message..." style="width:100%; margin-top:8px; padding:8px; border-radius:16px; border:1px solid #ccc;">
+
+    <!-- Chat Widget -->
+    <div class="chat-widget" id="chatWidget">
+        <div class="chat-header" id="chatHeader">
+            <h4>Chats</h4>
+            <button id="minimizeChat"><i class="fas fa-minus"></i></button>
+        </div>
+        <div class="chat-contacts" id="chatContacts"></div>
+        <div class="chat-window" id="chatWindow" style="display:none;">
+            <div class="chat-window-header">
+                <span id="chatPartnerName"></span>
+                <button id="closeChat"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="chat-messages" id="chatMessages"></div>
+            <div class="chat-input-area">
+                <input type="text" id="chatMessageInput" placeholder="Type a message...">
+                <button id="sendMessageBtn"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 
-<!-- Settings Modal (includes verification & boost) -->
-<div id="settingsModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); justify-content:center; align-items:center; z-index:300;">
-  <div style="background:white; width:400px; border-radius:12px; padding:20px;">
-    <h3><i class="fas fa-cog"></i> Settings & Verification</h3>
-    <div style="margin:16px 0;">
-      <label><strong>Profile Verification (Blue Badge)</strong></label>
-      <button id="verifyBtn" style="background:#1877f2; width:100%; margin:8px 0;">Request Blue Verification</button>
-      <p style="font-size:0.8rem;">Submit ID and selfie for review.</p>
-    </div>
-    <div>
-      <label><strong>Boost Marketplace Listing</strong></label>
-      <select style="width:100%; padding:8px; margin:8px 0;">
-        <option>Select listing to boost</option>
-        <option>Sneakers $50</option>
-        <option>iPhone $300</option>
-      </select>
-      <button class="boost-btn" style="width:100%;">Add Money & Boost</button>
-    </div>
-    <button onclick="document.getElementById('settingsModal').style.display='none'" style="margin-top:12px; background:#ccc;">Close</button>
-  </div>
-</div>
-
-<script>
-  // Professional interactive features
-  document.addEventListener('DOMContentLoaded', function() {
-    // Open settings modal via left sidebar settings or right sidebar
-    const settingsLinks = document.querySelectorAll('.sidebar-link .fa-cog, .right-sidebar button');
-    settingsLinks.forEach(el => {
-      if(el.closest('button') || el.classList.contains('fa-cog')) {
-        el.addEventListener('click', (e) => {
-          document.getElementById('settingsModal').style.display = 'flex';
-        });
-      }
-    });
-    
-    // Verification blue badge request
-    document.getElementById('verifyBtn').addEventListener('click', () => {
-      alert('✅ Verification request submitted! You will receive the blue checkmark after review. (Simulated real process)');
-      // Add blue badge dynamically to user avatar area (demo)
-      const postHeader = document.querySelector('.post-header .name');
-      if(postHeader && !postHeader.querySelector('.verified-badge')) {
-        postHeader.innerHTML += ' <i class="fas fa-check-circle verified-badge"></i>';
-      }
-    });
-
-    // Status upload simulation
-    document.getElementById('statusInput').addEventListener('keypress', (e) => {
-      if(e.key === 'Enter') {
-        alert('📝 Status updated! (Real upload would connect to backend)');
-        e.target.value = '';
-      }
-    });
-
-    // Marketplace boost button interaction
-    document.querySelectorAll('.boost-btn').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        alert('💰 Boost feature: Add money to promote this listing. (Payment gateway simulation)');
-      });
-    });
-
-    // Live stream join
-    const liveJoin = document.querySelector('.live-badge + strong + div button');
-    if(liveJoin) {
-      liveJoin.addEventListener('click', () => {
-        alert('🔴 Connecting to live stream... Camera & microphone access requested. (Real streaming simulation)');
-      });
-    }
-
-    // Friend connect / chat
-    document.querySelectorAll('.friend-item').forEach(friend => {
-      friend.addEventListener('click', () => {
-        alert('💬 Opening chat with ' + friend.innerText.trim() + '. Real-time messaging enabled.');
-      });
-    });
-
-    // Camera selfie / picture filter mention
-    const cameraAction = document.querySelector('.post-actions span .fa-camera');
-    if(cameraAction) {
-      cameraAction.parentElement.addEventListener('click', () => {
-        alert('📸 Camera opened: Take a selfie, apply filters, and upload directly! (Simulated)');
-      });
-    }
-  });
-</script>
+    <script src="app.js"></script>
 </body>
 </html>
